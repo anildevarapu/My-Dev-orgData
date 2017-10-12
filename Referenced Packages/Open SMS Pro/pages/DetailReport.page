@@ -1,0 +1,82 @@
+<apex:page controller="OpenSMSPro.DetailReport" sidebar="false" docType="html-5.0" id="pg">
+    <apex:form id="fm">             
+        <style>                           
+	       .grey_overlay {
+	           position: absolute;
+	           top: 0%;
+	           left: 0%;
+	           width: 100%;
+	           height: 100%;
+	           background-color: black;
+	           z-index:2;
+	           -moz-opacity: 0.4;
+	           opacity:.40;
+	           filter: alpha(opacity=40);
+	       }       
+  		</style> 
+		<script>
+		    function SearchRecordsInput(){
+		        var dateField = document.getElementById('pg:fm:pb:ip').value;
+		        var temp = true;           
+		        if(dateField == ''){
+		            alert('You must choose the date to search records');                
+		        }else{
+		            SearchRecords();                         
+		        }          
+		                                  
+		    }      
+	  	</script>    
+	  <apex:actionstatus id="loading">
+	    <apex:facet name="start">
+	        <div id="dvLoading" class="grey_overlay" style="z-index:100;"></div>
+	        <div style="position:absolute;top:45%;left:50%;">
+	            <img id="theImage" src="/img/loading32.gif" width="30px" style="z-index:99;"/>
+	        </div>
+	    </apex:facet>
+	  </apex:actionstatus>
+	  <apex:actionFunction name="SearchRecords" action="{!search}" status="loading" rerender="pb"/>  
+	  <apex:pageBlock title="Search Result" id="pb"> 	  
+	    <apex:outputText style="font-weight:bold" value="Select Report Type:"/>
+	       &nbsp;&nbsp;&nbsp;
+	       <apex:selectRadio value="{!selectedValue}">
+				<!-- <apex:selectOption itemValue="Daily" itemLabel="Daily"></apex:selectOption> -->
+	            <apex:selectOption itemValue="Monthly" itemLabel="Monthly"></apex:selectOption>
+	            <apex:selectOption itemValue="Yearly" itemLabel="Yearly"> </apex:selectOption>
+	       </apex:selectRadio>       
+	       <b>Select Date:</b>&nbsp;&nbsp; 
+	       <apex:input type="date" value="{!strDate}" id="ip"/>&nbsp;&nbsp;                 
+	       <apex:commandButton value="Search records" style="padding: 5px 21px;" onClick="SearchRecordsInput();return false;"/> <br/><br/>
+	        <apex:pageMessages /> 
+			<!-- <apex:outputPanel rendered="{!isDaily}">       
+	              <table>
+	                  <tr style="background-color:#d5ddf3;"><th style="width:208px;">UserName</th><th style="width:208px;">Single SMS</th><th style="width:208px;">Bulk SMS</th><th style="width:208px;">SMS Chat</th><th style="width:208px;">Incoming SMS</th><th style="width:208px;">Total SMS</th></tr>
+	                  <apex:repeat value="{!lstIds}" var="listItem">
+	                      <tr><td><b>{!mapName[listItem].Name}</b></td><td>{!mapDetailReport[listItem].Single_SMS__c}</td><td>{!mapDetailReport[listItem].Bulk_SMS__c}</td><td>{!mapDetailReport[listItem].SMS_Chat__c}</td><td>{!mapDetailReport[listItem].Incoming_SMS__c}</td><td>{!mapDetailReport[listItem].Total_SMS__c}</td></tr>
+	                  </apex:repeat>
+	              </table><br/><br/>
+	              <apex:commandButton value="Export" action="{!exportAll}" status="loading" style="margin-left: 502px;padding: 5px 21px;"/>
+	        </apex:outputPanel> -->
+	        <apex:outputPanel rendered="{!isRendered}">       
+	              <table>
+	                  <tr style="background-color:#d5ddf3;"><th style="width:208px;">UserName</th><th style="width:208px;">Single SMS</th><th style="width:208px;">Bulk SMS</th><th style="width:208px;">SMS Chat</th><th style="width:208px;">Incoming SMS</th><th style="width:208px;">Total SMS</th></tr>
+	                  <apex:repeat value="{!lstIds}" var="listItem">
+	                      <tr><td><b>{!mapName[listItem].Name}</b></td><td>{!mapTempSMSReport[listItem].Single_SMS__c}</td><td>{!mapTempSMSReport[listItem].Bulk_SMS__c}</td><td>{!mapTempSMSReport[listItem].SMS_Chat__c}</td><td>{!mapTempSMSReport[listItem].Incoming_SMS__c}</td><td>{!mapTempSMSReport[listItem].Total_SMS__c}</td></tr>
+	                  </apex:repeat>
+	              </table><br/><br/>
+	              <apex:commandButton value="Export" action="{!exportAll}" status="loading" style="margin-left: 502px;padding: 5px 21px;"/>
+	        </apex:outputPanel>
+	        <apex:outputPanel rendered="{!isDisplay}">
+	            <table id="myTable">
+	                <tr style="background-color:#d5ddf3;"> <th style="width:208px;">UserName</th><th style="width:208px;">Single SMS</th><th style="width:208px;">Bulk SMS</th><th style="width:208px;">SMS Chat</th><th style="width:208px;">Incoming SMS</th><th style="width:208px;">Total SMS</th></tr>       
+	                <apex:repeat value="{!lstIds}" var="key">
+	                    <tr><td colspan="6"><b>{!mapName[key].Name}</b></td></tr>  
+	                    <apex:repeat value="{!mapDetail2[key]}" var="listItem">
+	                        <tr><td><apex:outputText value="{0, date, MMMMM}"><apex:param value="{!listItem.Date__c}" /></apex:outputText></td><td>{!listItem.Single_SMS__c}</td><td>{!listItem.Bulk_SMS__c}</td><td>{!listItem.SMS_Chat__c}</td><td>{!listItem.Incoming_SMS__c}</td><td>{!listItem.Total_SMS__c}</td></tr>
+	                    </apex:repeat>
+	                </apex:repeat>
+	            </table>
+	            <apex:commandButton value="Export" action="{!exportAll}" status="loading" style="margin-left: 502px;padding: 5px 21px;"/>           
+	        </apex:outputPanel>               
+	   </apex:pageBlock>  
+    </apex:form>    
+</apex:page>

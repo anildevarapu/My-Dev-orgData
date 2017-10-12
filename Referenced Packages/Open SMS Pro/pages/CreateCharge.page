@@ -1,0 +1,5 @@
+<apex:page id="pg" controller="OpenSMSPro.CreateCharge" showChat="false" sidebar="false">
+    <apex:form id="fm"> 
+        <c:CreateChargVC id="CreateChargeVC"/>
+    </apex:form>
+</apex:page>

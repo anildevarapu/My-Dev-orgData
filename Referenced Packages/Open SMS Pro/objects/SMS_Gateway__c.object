@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <content>GatewayEditpg</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <content>GateWay</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Active__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Select this if you want to activate this gateway as your SMS Gateway. Only when the gateway is active, you can use it to send/receive messages.</inlineHelpText>
+        <label>Active</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Activity_Type__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Choose option type for Activity Creation for SMS Chat.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Choose the activity creation time for SMS Chat from the drop-down, Depending on whether you choose the time as Chat Close or OnDemand, the conversation will be created on your account.</inlineHelpText>
+        <label>Activity Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>On Demand</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Chat Close</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Bulk_SMS_Post_URL__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Please select a URL to post Bulk Messages; this could be the same as the URL for Single Messages or a different one(Example: http://www.smsglobal.com/http-api.php). The URL will depend on the SMS Gateway.</inlineHelpText>
+        <label>URL to Post</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Bulk_SMS_To_List__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Please choose a format to post the Message and Recipient Numbers (Example:&amp;recipient=$to$&amp;message=$text$)</inlineHelpText>
+        <label>Message Post Format</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>ChatUsers__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Chat permissions are provided to these users</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Chat permissions are provided to these users</inlineHelpText>
+        <label>Chat Users</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Chat_SMS__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Select option type for username printing on SMS Body.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>From the drop-down, select which SMS chat you want your user name/signature to be displayed on.</inlineHelpText>
+        <label>Username on SMS</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>First Message</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>All Messages</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>No Messege</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Chat_Username_Format__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Format of Username on SMS Body</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the type of username or signature that will displayed in the chat body.</inlineHelpText>
+        <label>Chat Username Format</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>LastName</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>FirstName</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Name</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Country_Code__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Country Code</label>
+        <length>10</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Default__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Select this to make this gateway as your default gateway. If you make this your default gateway then all your messages will be sent or received using this gateway.</inlineHelpText>
+        <label>Default</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Gateway_Attributes__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Select required features from available features</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select the different types of SMS you want to send/receive from this gateway. You can choose a single type or multiple ones from the available options: Single, Bulk, SMS Chat, TwoWaySMS.</inlineHelpText>
+        <label>Gateway Attributes</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Bulk</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>SMS Chat</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Two Way SMS</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Gateway_For_All_Countries__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Gateway For All Countries</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Help_Keywords__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>These words can be used by the customer to request for assistance. You can set a single keyword like &apos;help&apos; or multiple keywords separated by commas. The keywords can be in English or in your native language.</inlineHelpText>
+        <label>Help Keywords</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Help_Message__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Set the message notification you want to send to a user who requests assistance. This text will be sent when the user replies with the selected help keyword in English or in a native language (set earlier).</inlineHelpText>
+        <label>Help Message</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Limit__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Set the limit for the number of recipients to whom you can send one Bulk SMS from this Gateway. A Bulk SMS command usually has an upper limit on how many recipient phone numbers can be added in the &apos;to&apos; field in one bulk SMS.</inlineHelpText>
+        <label>Recipient Limit per Request</label>
+        <precision>4</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SMS_Chat__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Select SMS Chat option to enable SMS Chat feature.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select this if you want to enable SMS Chat from this Gateway.</inlineHelpText>
+        <label>SMS Chat</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SMS_Credentials__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Please provide your login details in URL format. (Example: action=sendsms&amp;user=johnk&amp;password=E@5y4u &amp;from=MyCompany). Please note that the format is gateway-specific and you need to refer to the Gateway API document for more information.</inlineHelpText>
+        <label>Login Details</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>SMS_Post_URL__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Please select a URL to post Single Messages (Example: http://www.smsglobal.com/http-api.php). This will be applied to all your single SMS&apos;s and will depend on the SMS Gateway.</inlineHelpText>
+        <label>URL to Post</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>SMS_To_List__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Please choose a format to post the Message and Recipient Numbers (Example:&amp;recipient=$to$&amp;message=$text$)</inlineHelpText>
+        <label>Message Post Format</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Separator__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Set the character to be used to separate recipient phone numbers. While this is Gateway-specific, you can use &apos;,&apos; if you are not sure.</inlineHelpText>
+        <label>Separator</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>,</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>;</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>&amp;</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Stop_Keywords__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>These words can be used by the customer to opt out of the Two-Way SMS service. You can set single keywords like &apos;stop&apos; or &apos;opt out&apos; or multiple keywords separated by commas. The keywords can be in English or in your native language.</inlineHelpText>
+        <label>Stop/Optout Keywords</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Stop_Optout_Message__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Set the message notification you want to send to a user who requests to stop or opt out of the SMS service. This text will be sent when the user replies with the selected stop keyword in English or in a native language (set earlier).</inlineHelpText>
+        <label>Stop / Optout Message</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Two_Way_SMS_Reply_Action__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Select Action Type to be performed on SMS Reply</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select Action Type to be performed on SMS Reply</inlineHelpText>
+        <label>Two Way SMS Reply Action</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Create Activity</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>No Activity</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Two_way_SMS__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Select Two way SMS option to enable Two way SMS feature.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select this if you want to enable Twoway SMS from this Gateway.</inlineHelpText>
+        <label>Two way SMS</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Welcome_Message__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Set the welcome message you want to send to a first time user. This is the message that will be sent when a recipient replies to your message for the first time.</inlineHelpText>
+        <label>Welcome Message</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <label>SMS Gateway</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Default__c</columns>
+        <columns>Active__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Gateway Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>SMS Gateways</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>CheckSecureGateway</fullName>
+        <active>false</active>
+        <errorConditionFormula>if(LEFT(SMS_Post_URL__c , 5) != &apos;https&apos; || LEFT(  Bulk_SMS_Post_URL__c , 5) != &apos;https&apos;,true,false)</errorConditionFormula>
+        <errorMessage>Allow only HTTPS</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Limit_Rule</fullName>
+        <active>true</active>
+        <description>Limit should not be less than1</description>
+        <errorConditionFormula>Limit__c &lt;  1</errorConditionFormula>
+        <errorDisplayField>Limit__c</errorDisplayField>
+        <errorMessage>Limit cannot be less than 1.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>SMS_Chat_feature</fullName>
+        <active>true</active>
+        <errorConditionFormula>OR( 
+AND( 
+INCLUDES(Gateway_Attributes__c,&apos;SMS Chat&apos;), 
+OR( 
+NOT(INCLUDES(Gateway_Attributes__c,&apos;Two Way SMS&apos;)), 
+NOT(Two_way_SMS__c) 
+)), 
+AND( 
+NOT(INCLUDES(Gateway_Attributes__c,&apos;SMS Chat&apos;)), 
+SMS_Chat__c 
+) 
+)</errorConditionFormula>
+        <errorMessage>You need to select Two Way SMS&amp; SMS Chat features.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>TwoWaySMS_Features</fullName>
+        <active>true</active>
+        <errorConditionFormula>OR( 
+AND( 
+NOT(INCLUDES(Gateway_Attributes__c,&apos;Two Way SMS&apos;)), 
+OR( 
+Two_way_SMS__c, 
+NOT(ISPICKVAL(Two_Way_SMS_Reply_Action__c, &apos;&apos;)) 
+)) 
+)</errorConditionFormula>
+        <errorMessage>You need to select Two Way SMS feature.</errorMessage>
+    </validationRules>
+</CustomObject>

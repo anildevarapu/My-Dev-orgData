@@ -1,0 +1,5 @@
+<apex:page controller="OpenSMSPro.BatchSummaryReport" id="pg">
+    <apex:form id="fm">
+    <c:BatchSummaryReportVC id="batchSummaryId"/>
+    </apex:form>
+</apex:page>

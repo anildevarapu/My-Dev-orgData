@@ -1,0 +1,56 @@
+<aura:component controller="massUpdateApexCon">
+	<aura:handler name="init" value="{!this}" action="{!c.loadOppertunities}"/>    
+    <ui:button label="Create New" press="{!c.createNew}"/>
+    <aura:renderIf isTrue="{!v.showAll}">
+    <ui:button label="{!v.massUpdateLabel}" press="{!c.editAll}"/>
+    <table style="margin:auto;">
+    	<thead>
+            <tr>
+                <th>Action</th>
+            	<th>Name</th>
+            	<th>Industry</th>
+                <th>Number Of Employees</th>
+            </tr>        	
+        </thead>
+        <tbody>
+        	<aura:iteration items="{!v.accounts}" var="obj">
+                <tr>
+                    <td>
+                        <ui:menuTriggerLink >edit</ui:menuTriggerLink>
+                        <ui:menuTriggerLink >delete</ui:menuTriggerLink>
+                    </td>
+                	<td style="padding:10px;">
+                    	<ui:inputText value="{!obj.Name}" disabled="{!v.editBool}"/>
+                    </td>
+                    <td style="padding:10px;">
+                    	<ui:inputText value="{!obj.Industry}" disabled="{!v.editBool}"/>
+                    </td>
+                    <td>
+                    	<ui:inputNumber value="{!obj.NumberOfEmployees}" disabled="{!v.editBool}"/>
+                    </td>
+                </tr>
+            </aura:iteration>
+        </tbody>
+    </table>
+	</aura:renderIf>   
+    <aura:renderIf isTrue="{!v.showCreate}">
+        <ui:button label="save" press="{!c.save}"/>
+        <ui:button label="cancel" press="{!c.cancel}"/>
+    	<table>
+        	<thead>
+                <tr>
+                    <th>Name</th>    
+                    <th>Industry</th>
+                    <th>Number of Employees</th>
+                </tr>
+            </thead>
+            <tbody>
+            	<tr>
+                    <td><ui:inputText value="{!v.acc.Name}"/></td>
+                    <td><ui:inputText value="{!v.acc.Industry}"/></td>
+                    <td><ui:inputNumber value="{!v.acc.NumberOfEmployees}"/></td>
+                </tr>
+            </tbody>
+        </table>
+    </aura:renderIf>
+</aura:component>

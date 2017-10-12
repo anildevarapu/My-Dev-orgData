@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>AddCampaign</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>AddToCampaign</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CallHighlightAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>EmailHighlightAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>EnableCustomerPortal</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>EnablePartnerPortalUser</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>EnableSelfService</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ListClean</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Merge</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>NewContact</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>RequestUpdate</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SmsHighlightAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ViewCustomerPortal</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ViewPartnerPortalUser</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ViewSelfService</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <enableFeeds>true</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <fields>
+        <fullName>AccountId</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>AssistantName</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>AssistantPhone</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>Birthdate</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>CleanStatus</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>Department</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>Description</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>DoNotCall</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>Email</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>Fax</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>HasOptedOutOfEmail</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>HasOptedOutOfFax</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>HomePhone</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>Jigsaw</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>Languages__c</fullName>
+        <externalId>false</externalId>
+        <label>Languages</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LastCURequestDate</fullName>
+    </fields>
+    <fields>
+        <fullName>LastCUUpdateDate</fullName>
+    </fields>
+    <fields>
+        <fullName>LeadSource</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Level__c</fullName>
+        <externalId>false</externalId>
+        <label>Level</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Secondary</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Tertiary</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Primary</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>MailingAddress</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>MobilePhone</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>Name</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>OpenSMSPro__SMS_Opt_Out__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>SMS Opt Out</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>OtherAddress</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>OtherPhone</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>OwnerId</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Phone</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>ReportsToId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Title</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>salary__c</fullName>
+        <externalId>false</externalId>
+        <label>salary</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <listViews>
+        <fullName>AllContacts</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All Contacts</label>
+    </listViews>
+    <listViews>
+        <fullName>BirthdaysThisMonth</fullName>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CONTACT.BIRTHDATE</field>
+            <operation>equals</operation>
+            <value>THIS_MONTH</value>
+        </filters>
+        <label>Birthdays This Month</label>
+    </listViews>
+    <listViews>
+        <fullName>MyContacts</fullName>
+        <filterScope>Mine</filterScope>
+        <label>My Contacts</label>
+    </listViews>
+    <listViews>
+        <fullName>NewLastWeek</fullName>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CONTACT.CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>LAST_WEEK</value>
+        </filters>
+        <label>New Last Week</label>
+    </listViews>
+    <listViews>
+        <fullName>NewThisWeek</fullName>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CONTACT.CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>THIS_WEEK</value>
+        </filters>
+        <label>New This Week</label>
+    </listViews>
+    <listViews>
+        <fullName>OpenSMSPro__Open_SMS</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CONTACT.PHONE3</columns>
+        <columns>OpenSMSPro__SMS_Opt_Out__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>Open SMS</label>
+    </listViews>
+    <searchLayouts>
+        <customTabListAdditionalFields>FULL_NAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>ACCOUNT.NAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CONTACT.PHONE1</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>FULL_NAME</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>ACCOUNT.NAME</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>ACCOUNT.SITE</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>FULL_NAME</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>ACCOUNT.NAME</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>ACCOUNT.SITE</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CONTACT.PHONE1</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CONTACT.PHONE3</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CONTACT.PHONE4</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CONTACT.PHONE5</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CONTACT.PHONE6</lookupPhoneDialogsAdditionalFields>
+        <searchResultsAdditionalFields>FULL_NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ACCOUNT.NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ACCOUNT.SITE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CONTACT.PHONE1</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CONTACT.EMAIL</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CORE.USERS.ALIAS</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>OpenSMSPro__Validation_rule_for_mobile_number</fullName>
+        <active>false</active>
+        <description>This validation rule is for validate mobile number when user enters below 10 digit number.</description>
+        <errorConditionFormula>IF(ISBLANK(MobilePhone),NULL,(LEN( MobilePhone ) &lt; 10 || LEN( MobilePhone ) &gt; 15))</errorConditionFormula>
+        <errorDisplayField>MobilePhone</errorDisplayField>
+        <errorMessage>Please Enter Valid Mobile Number.
+Should be Min 10 digits and below 15 digits</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>OpenSMSPro__Bulk_SMS</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Bulk SMS</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/26.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/26.0/apex.js&quot;)} 
+var smsCount= 
+sforce.apex.execute(&quot;OpenSMSPro.SendSMSws&quot;,&quot;UpdateAlert&quot;,{countsms:1});
+if(parseInt(smsCount) &lt; 1){
+alert(&apos;You have no credits in your account. Please buy some credits to send sms.&apos;);
+}
+else{
+var ContactRecords = {!GETRECORDIDS( $ObjectType.Contact)};
+var queryResult = sforce.connection.query(&quot;Select Id, Name,OpenSMSPro__Default__c From OpenSMSPro__SMS_Gateway__C where OpenSMSPro__Default__c = true &quot;);
+if(queryResult.size==0)
+{ 
+	alert(&apos;No default gateway. Please Configure your Gateway&apos;);
+}
+else{       
+	if(ContactRecords.length &lt; 1)
+	{
+		alert(&apos;Please select atleast  one Contact to send SMS&apos;);
+	}
+	else if(parseInt(smsCount) != 0){                
+		if(ContactRecords.length &gt; parseInt(smsCount))
+		{
+			alert(&apos;The number of records you have selected are more than the available messages&apos;);
+		}
+		else{
+			var strResult= sforce.apex.execute(&quot;OpenSMSPro.contactBulkSmsButton&quot; ,&quot;listContact&quot;, {Contactids: ContactRecords}); 
+			var name = window.location.hostname;
+			window.open(&quot;https://&quot;+name+strResult,&quot;_self&quot;);
+		}
+	}	
+}
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>OpenSMSPro__SMS_Chat</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>SMS Chat</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/21.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/21.0/apex.js&quot;)}
+var smsCount= 
+sforce.apex.execute(&quot;OpenSMSPro.SendSMSws&quot;,&quot;UpdateAlert&quot;,{countsms:1});
+if(parseInt(smsCount) &lt; 1){
+alert(&apos;You have no credits in your account. Please buy some credits to send sms.&apos;);
+}else{ 
+var mob = &apos;{!Contact.MobilePhone}&apos;;
+if(mob != null &amp;&amp; mob != &apos;&apos;) 
+{
+	var result=sforce.apex.execute(&quot;OpenSMSPro.SendSMSws&quot;,&quot;redirectSMS&quot;,{strobjId:&apos;{!Contact.Id}&apos;});
+	if(result==2){ 
+		alert(&apos;SMS Opt Out checked, Cannot initiate chat&apos;);
+	}else{
+	var queryResult = sforce.connection.query(&quot;Select Id,OpenSMSPro__SMS_Chat__c,OpenSMSPro__ChatUsers__c From OpenSMSPro__SMS_Gateway__C where OpenSMSPro__Default__c = true &quot;); 
+	var IsSMSChatEnabled = queryResult[&apos;records&apos;][&apos;OpenSMSPro__SMS_Chat__c&apos;]; 
+	var ChatUser = queryResult[&apos;records&apos;][&apos;OpenSMSPro__ChatUsers__c&apos;]; 
+	if(IsSMSChatEnabled == &apos;true&apos;){ 
+		var userId = &apos;{!$User.Id}&apos;; 
+		var IsChatUser = (ChatUser!=&apos;null&apos; &amp;&amp; ChatUser!=undefined &amp;&amp; ChatUser.indexOf(userId)&gt;=0); 
+		if(IsChatUser){
+						var taskId = sforce.apex.execute(&quot;OpenSMSPro.SendSMSws&quot;,&quot;CreateActivity&quot;,{recordId:&apos;{!Contact.Id}&apos;,nameField:&apos;Name&apos;,phoneField:&apos;MobilePhone&apos;});
+			var name = window.location.hostname; 
+			var str = &apos;/apex/OpenSMSPro__SMSChat?id={!Contact.Id}&amp;TskID=&apos;+taskId; 
+			ChatWindow(&quot;https://&quot;+name+str, &quot;SMS Chat&quot;,350,450); 
+		} 
+		else{ 
+			alert(&apos;You have no permissions to initiate SMS Chat!&apos;); 
+		} 
+	} 
+	else{ 
+		alert(&apos;SMS Chat is not enabled on your default SMS Gateway&apos;); 
+	} 
+	}
+}
+else{
+	alert(&apos;Mobile Phone should not be empty.&apos;); 
+}
+}
+function ChatWindow(pageURL, title,w,h) { 
+	var left = (screen.width/2)-(w/2); 
+	var top = (screen.height/2)-(h/2); 
+	var targetWin = window.open (pageURL, &apos;title&apos;, &apos;toolbar=no, location=yes, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=&apos;+w+&apos;, height=&apos;+h+&apos;, top=&apos;+top+&apos;, left=&apos;+left); 
+	//targetWin.focus(); 
+}</url>
+    </webLinks>
+</CustomObject>

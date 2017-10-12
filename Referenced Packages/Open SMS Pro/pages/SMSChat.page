@@ -1,0 +1,5 @@
+<apex:page id="pg" controller="OpenSMSPro.SMSChat" showHeader="false" showChat="false" sidebar="false" >
+    <apex:form id="fm"> 
+       <c:SMSChatVC id="SMSChatVC"/>
+    </apex:form>
+</apex:page>

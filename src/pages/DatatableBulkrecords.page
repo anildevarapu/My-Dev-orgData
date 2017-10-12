@@ -1,0 +1,228 @@
+<apex:page showHeader="false" controller="DataTableController">
+ 
+<!--
+<apex:includeScript value="https://code.jquery.com/jquery-1.11.3.min.js" />
+<apex:includeScript value="//code.jquery.com/ui/1.11.4/jquery-ui.js" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"></link>
+<apex:includeScript value="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js" />
+<apex:includescript value="https://cdn.datatables.net/1.10.10/js/dataTables.bootstrap.min.js" />
+<apex:stylesheet value="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+<apex:stylesheet value="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css" />
+ onclick="SearchFilter();"-->
+<apex:sectionHeader title="Contacts"/>
+<apex:form >
+<div class="row" style="margin-top:5px;">
+                 <div class="col-md-6 col-sm-6 col-xs-12" style="padding-left:0;">
+                    <apex:outputLabel value="View:" style=" text-align: right; margin-right: 5px;margin-left: 15px;" />
+                    <apex:selectList onchange="listviewsort(this)"  size="1" styleClass="form-control" style="width:40%;min-width:40%;display:inline;"><!-- value="{!ConFilterId}" -->
+                       
+                        <apex:selectOptions value="{!listviewpicklst}" />
+                    </apex:selectList>
+                  </div>
+                  
+                 </div>  
+
+ <div style="float:right"><input id="txtFilter" type="search" style="width:150Px;"/><input type="button" id="btnFilter" value="Search"/> </div>
+<table id="table" cellpadding="0" cellspacing="0" border="0">
+    <thead>
+        <th>Name</th>
+        <th>Birthdate</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Salary</th>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+</apex:form>
+<script
+type="text/javascript"
+charset="utf8"
+src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"
+>
+</script>
+<script
+type="text/javascript"
+charset="utf8"
+src="https://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"
+>
+</script>
+<link
+rel="stylesheet"
+type="text/css"
+href="https://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css"
+/>
+
+
+
+<script>
+ 
+var j$ = jQuery.noConflict();
+ 
+var fields = ['Name', 'Birthdate', 'Phone', 'Email', 'Salary__c'];
+ 
+var aoColumns = [];
+for (var i = 0; i < fields.length; i++) {
+    aoColumns.push({'mData': fields[i]});
+}
+ 
+
+j$(document).ready(function() {
+
+j$('#table').dataTable({
+        'aoColumns': aoColumns,
+        'bProcessing': true,
+        'bServerSide': true,
+        'bFilter': false,
+        'sAjaxSource': 'fakeUrl',
+        'fnServerData': function(sSource, aoData, fnCallback) {
+            console.log(JSON.stringify(aoData));
+            // Call the @RemoteAction JavaScript function
+           anildev.DataTableController.contacts(aoData,'OME-', function(result, event) {
+                if (event.type != 'exception') {
+                   // console.log(JSON.stringify(result));
+                    for (var i = 0; i < result.aaData.length; i++) {
+                        var r = result.aaData[i];
+                        for (var j = 0; j < fields.length; j++) {
+                            var field = fields[j];
+                            if (r[field] == undefined) {
+                                // DataTables pops a dialog for undefined values
+                                r[field] = null;
+                            } else if (field == 'Birthdate') {
+                                // Dates transmitted as longs
+                                var d = new Date(r[field]);
+                                r[field] = ''
+                                        + (d.getMonth() + 1)
+                                        + '/'
+                                        + d.getDate()
+                                        + '/'
+                                        + d.getFullYear()
+                                        ;
+                            }
+                        }
+                    }
+                    // Call back into the DataTable function
+                    fnCallback(result);
+                } else {
+                    alert(event.message);
+                }
+            });
+        }
+    });
+    
+
+});
+ 
+document.getElementById("btnFilter").onclick = function() {NewFilter()};
+
+  function NewFilter(){
+ var Filter=document.getElementById("txtFilter").value;
+ var tablewidth='100';
+// alert(Filter);
+     j$('#table').dataTable({
+        'aoColumns': aoColumns,
+        'retrieve': true,
+        'paging': true,
+        'bDestroy': true,
+        'bFilter': false,
+        "sScrollX": "100%",
+    "sScrollXInner": tablewidth+"%",
+        'sAjaxSource': 'fakeUrl',
+        'fnServerData': function(sSource, aoData, fnCallback) {
+            console.log(JSON.stringify(aoData));
+            // Call the @RemoteAction JavaScript function
+            anildev.DataTableController.contactsFilter(aoData,Filter, function(result, event) {
+                if (event.type != 'exception') {
+                    console.log(JSON.stringify(result));
+                    for (var i = 0; i < result.aaData.length; i++) {
+                        var r = result.aaData[i];
+                        for (var j = 0; j < fields.length; j++) {
+                            var field = fields[j];
+                            if (r[field] == undefined) {
+                                // DataTables pops a dialog for undefined values
+                                r[field] = null;
+                            } else if (field == 'Birthdate') {
+                                // Dates transmitted as longs
+                                var d = new Date(r[field]);
+                                r[field] = ''
+                                        + (d.getMonth() + 1)
+                                        + '/'
+                                        + d.getDate()
+                                        + '/'
+                                        + d.getFullYear()
+                                        ;
+                            }
+                        }
+                    }
+                    // Call back into the DataTable function
+                    fnCallback(result);
+                } else {
+                    alert(event.message);
+                }
+            });
+        }
+    });
+ }
+ 
+function listviewsort(htmlobj){
+ var filterbyid=htmlobj.value;
+ //alert('filter id'+filterbyid);
+ var tablewidth='100';
+
+
+if(filterbyid=='none'){
+
+NewFilter();
+
+
+}
+else {
+     j$('#table').dataTable({
+        'aoColumns': aoColumns,
+        'retrieve': true,
+        'paging': true,
+        'bDestroy': true,
+        'bFilter': false,
+        "sScrollX": "100%",
+    "sScrollXInner": tablewidth+"%",
+        'sAjaxSource': 'fakeUrl',
+        'fnServerData': function(sSource, aoData, fnCallback) {
+            console.log(JSON.stringify(aoData));
+            // Call the @RemoteAction JavaScript function
+            anildev.DataTableController.contactlisviewsort(aoData,filterbyid, function(result, event) {
+                if (event.type != 'exception') {
+                    console.log(JSON.stringify(result));
+                    for (var i = 0; i < result.aaData.length; i++) {
+                        var r = result.aaData[i];
+                        for (var j = 0; j < fields.length; j++) {
+                            var field = fields[j];
+                            if (r[field] == undefined) {
+                                // DataTables pops a dialog for undefined values
+                                r[field] = null;
+                            } else if (field == 'Birthdate') {
+                                // Dates transmitted as longs
+                                var d = new Date(r[field]);
+                                r[field] = ''
+                                        + (d.getMonth() + 1)
+                                        + '/'
+                                        + d.getDate()
+                                        + '/'
+                                        + d.getFullYear()
+                                        ;
+                            }
+                        }
+                    }
+                    // Call back into the DataTable function
+                    fnCallback(result);
+                } else {
+                    alert(event.message);
+                }
+            });
+        }
+    });
+    }
+ }
+ 
+</script>
+ 
+</apex:page>

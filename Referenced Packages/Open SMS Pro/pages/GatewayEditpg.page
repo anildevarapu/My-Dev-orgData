@@ -1,0 +1,177 @@
+<apex:page standardController="OpenSMSPro__SMS_Gateway__c" extensions="OpenSMSPro.Gatewayeditcls" sideBar="false">
+    <style>
+        .pbSubheader{
+            background-color:#acbf40 !important; 
+            color: #000000 !important;
+        }
+        .grey_overlay {
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index:2;
+            -moz-opacity: 0.4;
+            opacity:.40;
+            filter: alpha(opacity=40);
+        }
+    </style>
+    <apex:actionstatus id="loading">
+        <apex:facet name="start">
+            <div id="dvLoading" class="grey_overlay" style="z-index:100;"></div>
+            <div style="position: absolute;top: 45%;left: 50%;">
+                <img src="/img/loading32.gif" title="Please Wait..." width="30px" style="position: absolute;z-index: 99;"/>
+            </div>
+        </apex:facet>
+    </apex:actionstatus>
+    <apex:form > 
+        <apex:pageMessages id="thePgMsg"/>
+        <apex:sectionHeader title="SMS Gateway Edit" subtitle="{!objS.Name}"/>
+        <apex:pageblock title="SMS Gateway Edit" tabStyle="SMS_Gateway__c" mode="edit">                
+            <apex:PageBlockButtons location="both">
+                <apex:commandButton value="Save" action="{!savedata}"/>
+                <apex:commandButton value="Save & New" action="{!Quicksave}"/>                    
+                <apex:commandButton value="Cancel" action="{!Cancel}"/>
+            </apex:PageBlockButtons>
+            <apex:pageblockSection title="Gateway Details" collapsible="false" columns="2">
+                <apex:inputField value="{!objS.Name}" required="true"/>
+                <apex:inputField value="{!objS.OpenSMSPro__Default__c}"/>
+                <apex:inputField value="{!objS.OpenSMSPro__Active__c}"/>
+                <apex:inputField value="{!objS.OpenSMSPro__Country_Code__c}"/>
+                <apex:inputField value="{!objS.OpenSMSPro__Gateway_For_All_Countries__c}"/>
+                <apex:inputField value="{!Objs.OpenSMSPro__Gateway_Attributes__c}"/>
+            </apex:pageblockSection>
+            <apex:pageblockSection title="Gateway Login" collapsible="false" columns="2">
+                <apex:inputField value="{!objS.OpenSMSPro__SMS_Credentials__c}" style="width:435px;height:140px;"/>
+                <!--<apex:inputField value="{!objS.PushUrl__c}" style="width: 250px;"/>-->
+            </apex:pageblockSection>
+            <apex:pageblockSection title="Single SMS Settings" collapsible="false" columns="2">
+                <apex:inputField value="{!objS.OpenSMSPro__SMS_Post_URL__c}"/>
+                <apex:inputField value="{!objS.OpenSMSPro__SMS_To_List__c}"  style="width: 250px;"/>
+            </apex:pageblockSection>
+            <apex:pageblockSection title="Bulk SMS Settings" collapsible="false" columns="2">
+                <apex:inputField value="{!objS.OpenSMSPro__Bulk_SMS_Post_URL__c}"/>
+                <apex:inputField value="{!objS.OpenSMSPro__Bulk_SMS_To_List__c}"  style="width: 250px;"/>
+                <apex:inputField value="{!objS.OpenSMSPro__Separator__c}"/>
+                <apex:inputField value="{!objS.OpenSMSPro__Limit__c}"/>                       
+            </apex:pageblockSection>
+            <!-- <apex:pageblockSection title="Advanced Settings" collapsible="false" columns="2">
+                <apex:inputField value="{!objS.Activity_Type__c}"/>
+                <apex:inputField value="{!objS.Chat_Username_Format__c}"  style="width: 150px;"/>                   
+                <apex:inputField value="{!objS.SMS_Chat__c}"/>                 
+                <apex:inputField value="{!objS.Two_way_SMS__c}"/>
+                <apex:inputField value="{!objS.Chat_SMS__c}"/>
+                <apex:inputField value="{!objS.Two_Way_SMS_Reply_Action__c}"/>                  
+                <apex:inputField value="{!objS.Gateway_Attributes__c}"/>
+            </apex:pageblockSection> -->
+            <!-- <apex:pageblockSection title="Messages To Send" collapsible="false" columns="2">
+                 </apex:pageblockSection> --> 
+            <apex:pageblockSection title="2- Way SMS Settings" collapsible="false" columns="2">
+                <apex:inputField value="{!Objs.OpenSMSPro__Two_way_SMS__c}"/>
+                <apex:inputField value="{!objS.OpenSMSPro__Welcome_Message__c}" style="width: 300px;height: 100px;"/>
+                <apex:inputField value="{!objS.OpenSMSPro__Help_Keywords__c}"/>
+                <apex:inputField value="{!objS.OpenSMSPro__Help_Message__c}" style="width: 300px;height: 100px;"/>
+                <apex:inputField value="{!objS.OpenSMSPro__Stop_Keywords__c}"/>
+                <apex:inputField value="{!objS.OpenSMSPro__Stop_Optout_Message__c}" style="width: 300px;height: 100px;"/>
+                <!-- <apex:inputField value="{!Objs.Two_Way_SMS_Reply_Action__c}"/> -->
+            </apex:pageblockSection>                           
+            <apex:pageblockSection title="SMS Chat Settings" collapsible="false" columns="2">
+                    <apex:inputField value="{!Objs.OpenSMSPro__SMS_Chat__c}"/> 
+                    <apex:inputField value="{!Objs.OpenSMSPro__Chat_SMS__c}"/>
+                    <apex:inputField value="{!Objs.OpenSMSPro__Activity_Type__c}"/>
+                    <apex:outputPanel > 
+                        <table> 
+                            <tr>
+                                <td style="padding-left:117px;">
+                                    <strong style="color: rgb(83, 82, 82);">Username Format</strong>
+                                </td>
+                                <td style="padding-left:16px;">
+                                    <apex:inputField value="{!Objs.OpenSMSPro__Chat_Username_Format__c}" />
+                                    <strong style="color: rgb(83, 82, 82);">@CompanyName</strong>
+                                </td>
+                            </tr>
+                        </table>
+                    </apex:outputPanel> 
+            </apex:pageblockSection>  
+            <apex:pageblockSection columns="1">
+                <strong>SMS Chat Users </strong><hr/>
+                <div style="font-size:109%">
+                    This section is used to provide SMS chat permissions to a user, select a name from the list of Available Users on the left and add it to the Selected Users list on the right. The 'Available Users' is a list of all the users associated with this org while the 'Selected Users' are those users who have been given permission to use SMS Chat.
+                </div>
+                <br/><br/>   
+                <div style="padding-left:0px; align:center;">
+                    <table style="border: 1px solid gray;width:630px;">
+                        <tr></tr>
+                        <tr>
+                            <td>
+                                <apex:actionRegion >
+                                    <apex:outputPanel id="BoxPanel">
+                                        <div class="message errorM3" style="word-wrap:break-word;display:{!IF(errorInChatUser != '', 'block','none')}">{!errorInChatUser}</div>
+                                        <table>     
+                                            <tr>         
+                                                <td>
+                                                    <apex:actionStatus id="SearchIcon">      
+                                                        <apex:facet name="stop">
+                                                            <apex:outputPanel >
+                                                                <span class="labelCol">Search:</span>
+                                                                <apex:inputText style="width:100Px;" value="{!SearchText}" />
+                                                                <span style="float: left;"></span>  
+                                                                <apex:commandButton action="{!Find}" value="Find" rerender="BoxPanel" status="SearchIcon" />
+                                                            </apex:outputPanel>
+                                                        </apex:facet>
+                                                        <apex:facet name="start">
+                                                            <apex:outputPanel >
+                                                                <apex:commandButton style="float: left;" disabled="true" value="Find" />
+                                                                <div style="padding-left:150px;">
+                                                                    <img style="float: left;" src="/img/loading24.gif" />
+                                                                </div>
+                                                            </apex:outputPanel>
+                                                        </apex:facet>
+                                                    </apex:actionStatus>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <table style="width: 97%">    
+                                            <tr>
+                                                 <th style="width:50%" class="selectTitle">Available Users</th>
+                                                 <th style="width:30px"></th>
+                                                 <th style="width:50%" class="selectTitle">Selected Users</th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <apex:selectList value="{!LeftSelectedList}" multiselect="true" style="width:100%" size="8">
+                                                        <apex:selectOptions value="{!LeftOptionList}" />
+                                                    </apex:selectList>
+                                                </td>
+
+                                                <td style="vertical-align: middle;">
+                                                    <div>
+                                                        <apex:image styleClass="picklistArrowRight" value="/s.gif">
+                                                            <apex:actionSupport event="onclick" action="{!ClickRight}" reRender="BoxPanel" status="loading"/>
+                                                        </apex:image>
+                                                        <br /> <br />
+                                                        <apex:image styleClass="picklistArrowLeft" value="/s.gif">
+                                                            <apex:actionSupport event="onclick" action="{!ClickLeft}" reRender="BoxPanel" status="loading"/>
+                                                        </apex:image>
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <apex:selectList value="{!RightSelectedList}" multiselect="true" style="width:100%" size="8">
+                                                        <apex:selectOptions value="{!RightOptionList}"/>
+                                                    </apex:selectList>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </apex:outputPanel>
+                                </apex:actionRegion>
+                            </td>
+                        </tr>
+                    </table>
+                </div>     
+            </apex:pageblockSection>                                        
+        </apex:pageblock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,43 @@
+<aura:component controller="ContactController" > 
+   <ltng:require styles="/resource/slds090/assets/styles/salesforce-lightning-design-system.min.css"/>
+    <aura:attribute name="contactId" type="Id" required="true" />
+    <aura:attribute name="contact" type="Contact"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+	<div class="slds">
+	        <div class="slds-page-header">
+          <div class="slds-grid">
+            <div class="slds-col slds-has-flexi-truncate">
+              <p class="slds-text-heading--label">Update Contact</p>
+              <div class="slds-grid">
+                <div class="slds-grid slds-type-focus slds-no-space">
+                  <h1 class="slds-text-heading--medium slds-truncate" title="My Expenses">{!v.contact.Name}</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+ <div class="container">
+
+ <form class="slds-form--stacked">
+ <div class="slds-form-element slds-is-required">
+        <div class="slds-form-element__control">
+	
+        <ui:inputEmail label="Email: " class="slds-input" labelClass="slds-form-element__label" value="{!v.contact.Email}"/>
+    
+		</div></div>
+		 <div class="slds-form-element slds-is-required">
+        <div class="slds-form-element__control">
+	
+        <ui:inputPhone label="Phone: " class="slds-input" labelClass="slds-form-element__label" value="{!v.contact.Phone}"/>
+    
+		</div></div>
+    
+
+	<div class="slds-form-element">
+    <ui:button class="slds-button slds-button--neutral" labelClass="label" label="Update" press="{!c.updateContact}"/>
+	</div>
+	</form>
+	 </div>
+	  </div>
+</aura:component>

@@ -1,0 +1,6 @@
+<apex:page controller="OpenSMSPro.Twowaysms"  action="{!save}">
+    <apex:form id="frm" >
+      <apex:pageblock >
+      </apex:pageblock>
+  </apex:form>
+</apex:page>

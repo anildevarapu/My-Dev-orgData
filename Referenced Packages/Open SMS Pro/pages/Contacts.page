@@ -1,0 +1,18 @@
+<!--
+/*Page Name: Contacts
+* Author : Charan & Jaya Lakshmi
+* Date : 05th Feb 2011
+* Purpose:This page is used whenever the user clicks on Bulk sms button a poup is generated with list of 
+contacts user selected and subject with text area field. Enter your text in the text box provided and
+click on send button
+* Modification History :
+*/-->
+
+<!-- Start of Contacts Page-->
+<apex:page id="page" controller="OpenSMSPro.sendContactBulkSms1" tabstyle="Contact" sidebar="false">
+<apex:stylesheet value="{!URLFOR($Resource.OpenSMSPro__OpenSMS_Base, 'CSS/style.css')}" />
+    <apex:form id="form">         
+        <c:ContactSMSComponent id="com"/>      
+    </apex:form>
+</apex:page>
+<!-- End of Contacts Page-->

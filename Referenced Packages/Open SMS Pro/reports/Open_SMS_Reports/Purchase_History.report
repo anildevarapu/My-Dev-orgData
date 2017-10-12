@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>Purchase_History__c.Amount__c</field>
+    </columns>
+    <columns>
+        <field>Purchase_History__c.No_of_Credits__c</field>
+    </columns>
+    <columns>
+        <field>Purchase_History__c.Purchase_Date__c</field>
+    </columns>
+    <columns>
+        <field>Purchase_History__c.Reference_No__c</field>
+    </columns>
+    <columns>
+        <field>Purchase_History__c.Status__c</field>
+    </columns>
+    <format>Tabular</format>
+    <name>Purchase History</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Purchase_History__c</reportType>
+    <scope>user</scope>
+    <showDetails>true</showDetails>
+    <timeFrameFilter>
+        <dateColumn>Purchase_History__c.Purchase_Date__c</dateColumn>
+        <interval>INTERVAL_CURRENT</interval>
+    </timeFrameFilter>
+</Report>

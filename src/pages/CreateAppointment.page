@@ -1,0 +1,380 @@
+<apex:page controller="CreateAppointmentController" showHeader="false" standardStylesheets="false">
+
+
+ <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> 
+ 
+ 
+           <!-- <div id="dialog" title="Basic dialog" hidden="hidden">
+  <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+</div> -->
+ 
+ 
+  <apex:composition template="LDS_ApplicationTemplate">
+    <apex:define name="content">
+    <apex:form >
+      <div class="slds">    
+<c:LDS_SectionHeader title="Customer Information" />
+
+<div class="slds-page-header">
+
+  
+  <div class="slds-form--stacked">
+  
+          <div class="slds-form-element">
+            <label class="slds-form-element__label" for="inputSample3">First Name</label>
+            <div class="slds-form-element__control">
+              <!-- <input id="inputSample3" class="slds-input" type="text" placeholder="Placeholder Text" /> -->
+              <apex:inputField id="inputSample3" Styleclass="slds-input" value="{!lde.FirstName}"  />
+            </div>
+          </div>
+          
+          <div class="slds-form-element">
+            <label class="slds-form-element__label" for="textareaSample4">Last Name</label>
+            <div class="slds-form-element__control">
+              <!-- <textarea  class="slds-textarea"></textarea> -->
+              <apex:inputField id="textareaSample4" Styleclass="slds-input" value="{!lde.LastName}"   />
+            </div>
+          </div>
+          
+          
+          <div class="slds-form-element">
+            <label class="slds-form-element__label" for="textareaSample5">Street</label>
+            <div class="slds-form-element__control">
+              <!-- <textarea  class="slds-textarea"></textarea> -->
+              <apex:inputField id="textareaSample5" Styleclass="slds-input" value="{!lde.Street}"   />
+            </div>
+          </div>
+          
+          
+          <div class="slds-form-element">
+            <label class="slds-form-element__label" for="textareaSample6">City</label>
+            <div class="slds-form-element__control">
+              <!-- <textarea  class="slds-textarea"></textarea> -->
+              <apex:inputField id="textareaSample6" Styleclass="slds-input" value="{!lde.City}"   />
+            </div>
+          </div>
+          
+          
+          <div class="slds-form-element">
+            <label class="slds-form-element__label" for="textareaSample7">State</label>
+            <div class="slds-form-element__control">
+              <!-- <textarea  class="slds-textarea"></textarea> -->
+              <apex:inputField id="textareaSample7" Styleclass="slds-input" value="{!lde.State}"   />
+            </div>
+          </div>
+          
+          
+          <div class="slds-form-element">
+            <label class="slds-form-element__label" for="textareaSample8">Zip</label>
+            <div class="slds-form-element__control">
+              <!-- <textarea  class="slds-textarea"></textarea> -->
+              <apex:inputField id="textareaSample8" Styleclass="slds-input" value="{!lde.PostalCode}"   />
+            </div>
+          </div>
+      
+          
+        </div>
+  
+  
+  
+  
+  
+  
+  </div>
+  </div>
+  
+  <div class="slds">    
+<c:LDS_SectionHeader title="Lead Owner" />   
+        
+        <div class="slds-page-header">
+ <div class="slds-form--stacked">
+  
+          <div class="slds-form-element">
+            <label class="slds-form-element__label" for="inputSample9">First Name</label>
+            <div class="slds-form-element__control">
+              <!-- <input id="inputSample3" class="slds-input" type="text" placeholder="Placeholder Text" /> -->
+              <apex:inputField id="inputSample9" Styleclass="slds-input" value="{!lde.Owner.FirstName}"  />
+            </div>
+          </div>        
+        
+        
+        <div class="slds-form-element">
+            <label class="slds-form-element__label" for="inputSample10">Last Name</label>
+            <div class="slds-form-element__control">
+              <!-- <input id="inputSample3" class="slds-input" type="text" placeholder="Placeholder Text" /> -->
+              <apex:inputField id="inputSample10" Styleclass="slds-input" value="{!lde.Owner.LastName}"  />
+            </div>
+          </div> 
+          
+          
+          <div class="slds-form-element">
+            <label class="slds-form-element__label" for="inputSample11">Email</label>
+            <div class="slds-form-element__control">
+              <!-- <input id="inputSample3" class="slds-input" type="text" placeholder="Placeholder Text" /> -->
+              <apex:inputField id="inputSample11" Styleclass="slds-input" value="{!lde.Owner.email}"  />
+            </div>
+          </div> 
+          
+          
+          <div class="slds-form-element">
+            <label class="slds-form-element__label" for="inputSample12">Phone</label>
+            <div class="slds-form-element__control">
+              <!-- <input id="inputSample3" class="slds-input" type="text" placeholder="Placeholder Text" /> -->
+              <apex:inputField id="inputSample12" Styleclass="slds-input" value="{!lde.Owner.phone}"  />
+            </div>
+          </div> 
+        
+        
+        
+        
+        
+        </div> 
+        
+        
+        
+        
+
+  </div>
+  
+  
+  
+  
+        </div><!-- ./slds end -->
+        
+        
+  <div class="slds"> 
+ <header class="slds-card__header slds-grid">  
+ <div class="slds-media__figure">
+ <svg aria-hidden="true" class="slds-icon slds-icon-standard-new-lead slds-icon--small">
+              <use xlink:href="{!URLFOR($Resource.SLDS080, '/assets/icons/standard/lead_60')}"></use>
+            </svg>
+          
+<c:LDS_SectionHeader title="Estimator Calendar" />
+ </div>
+<div id='calendar'></div>     
+ </header>      
+ </div>    
+ 
+ 
+  <div class="slds"> 
+  <div class="slds-page-header">  
+   <table id="eventsectiontbl" width="30%" border="0">
+  <tr>
+    <td width="50%" style="text-align:right;"></td>
+    <td ><apex:commandButton value="Save Appointment"  onclick="getapoint();return false;"  reRender="pb" StyleClass="slds-button slds-button--brand slds-button--small" /></td>
+    
+  </tr>
+ 
+   </table> 
+ 
+   </div> 
+
+  </div> 
+        
+    
+        </apex:form>
+    </apex:define>
+  </apex:composition>
+</html> 
+ <apex:stylesheet value="https://code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css" />
+<apex:stylesheet value="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.0/fullcalendar.min.css" />
+<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" /> 
+<apex:includeScript value="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" />
+<apex:includeScript value="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"/>
+<apex:includeScript value="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.0/fullcalendar.min.js "/> 
+<script>
+var mm;
+var mn;
+var returned_endate;
+var mett;
+var mte;
+var miy;
+var mxe;
+
+$(document).ready(function() {
+$('#calendar').fullCalendar({
+header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+    theme: true,
+    defaultView: 'agendaWeek',
+    events: [
+        {
+            title  : 'event1',   
+            start  : '2010-09-01'  // Date
+        },
+        {
+            title  : 'event2',
+            start  : '2015-09-05',  // Date
+            end    : '2010-09-07'   // Date
+        },
+        {
+            title  : 'event3',
+            start  : '2015-09-09T12:30:00',  // Date and Date
+            end    : '2015-09-09T01:30:00',  // // Date and Date
+            allDay : false// will make the time show
+        }
+    ],
+    
+     eventRender: function(event, element) {
+          element.bind('dblclick', function() {
+             alert('double click!');
+          });
+       },
+       dayClick: function(date, allDay, jsEvent, view) {
+       $("#j_id0\\:j_id2\\:j_id19\\:j_id49").removeAttr('disabled');
+       
+        var nme = '{!lde.Owner.FirstName}'+' '+'{!lde.Owner.LastName}';
+        var emel = '{!lde.Owner.email}';
+        var phn = '{!lde.Owner.phone}';
+
+        
+        //alert(nme);
+
+         mm = moment(date).format("YYYY-MM-DD hh:mm:ss");
+
+        mn = moment(date).format("YYYY-MM-DD hh:mm A");
+        returned_endate = moment(date).add(30, 'minutes');
+        mett = moment(returned_endate).format("YYYY-MM-DD hh:mm A");
+        mxe = moment(returned_endate).format("YYYY-MM-DD hh:mm:ss");
+
+        mte = moment(date).format("YYYY-MM-DD");
+        miy = moment(date).format("hh:mm A");
+
+        //alert(mte);
+        //alert(miy);
+        
+
+       
+        //alert(mm);
+         //alert(mn);
+         //alert(mett);
+
+
+         
+        $("#name").val(nme);
+        $("#Date").val(mte);
+        $("#Time").val(miy);
+        $("#Email").val(emel);
+        $("#Phone").val(phn);
+        $("#Subject").val();
+        $("#ShowTm").val();
+        $("#Location").val();
+        
+        //$("#Location")j_id0:j_id2:j_id19:j_id49
+        
+        $( "#dialog" ).dialog({
+          width: 500,
+          buttons: {
+        //"Create an account": addUser,
+        Cancel: function() {
+          $( "#dialog" ).dialog( "close" );
+          disblebtn();
+        }
+      },
+      close: function( event, ui ){
+      $( "#dialog" ).dialog( "close" );
+      disblebtn();
+      }
+   
+
+        });
+      }
+})
+
+
+
+$("#j_id0\\:j_id2\\:j_id19\\:j_id49").attr('disabled','disabled');
+});
+
+
+function disblebtn(){
+
+
+
+$("#j_id0\\:j_id2\\:j_id19\\:j_id49").attr('disabled','disabled');
+
+}
+
+
+function getapoint(){
+
+var eml= $("#Email").val();
+alert(mm);
+alert(mxe);
+alert(eml);
+passeventdetails(mm,mxe,eml);
+
+}
+
+
+</script>
+
+
+
+<div id="dialog" title="My dialog" width="100%" hidden="hidden">
+    <apex:form >
+<table id="eventsectiontbl" width="100%" border="0">
+
+            <tr>
+             <td width="40%" style="text-align:right;"><b>Assigned To</b></td>
+            <td><apex:inputField id="inptsnl"  value="{!evt.OwnerId}"  /></td> <!-- Styleclass="slds-input" -->
+            </tr>
+
+            <tr>
+            <td width="40%" style="text-align:right;"><b>Initial Appoinment Date</b></td>
+            <td><input type="text" name="title" id="Date" class="text ui-widget-content ui-corner-all" disabled="disabled" ></input></td>
+            </tr>
+
+            <tr>
+            <td width="40%" style="text-align:right;"><b>Initial Appointment Time</b></td>
+            <td><input type="text" name="title" id="Time" class="text ui-widget-content ui-corner-all" disabled="disabled"></input></td>
+            </tr>
+
+            <tr>
+            <td width="40%" style="text-align:right;"><b>Email</b></td>
+            <td><input type="text" name="title" id="Email" class="text ui-widget-content ui-corner-all" ></input></td>
+            </tr>
+
+            <tr>
+            <td width="40%" style="text-align:right;"><b>Phone</b></td>
+            <td><input type="text" name="title" id="Phone" class="text ui-widget-content ui-corner-all" ></input></td>
+            </tr>
+
+            <tr>
+            <td width="40%" style="text-align:right;"><b>Subject</b></td>
+            <td><!-- <input type="text" name="title" id="Subject" class="text ui-widget-content ui-corner-all" ></input> -->
+            <apex:inputField id="inputsmpl" value="{!evt.Subject}"  />
+            </td>
+            </tr>
+
+            <tr>
+            <td width="40%" style="text-align:right;"><b>Show Time As</b></td>
+            <td><input type="text" name="title" id="ShowTm" class="text ui-widget-content ui-corner-all" ></input></td>
+            </tr>
+
+            <tr>
+            <td width="40%" style="text-align:right;"><b>Location</b></td>
+            <td><input type="text" name="title" id="Location" class="text ui-widget-content ui-corner-all" ></input></td>
+            </tr>
+        </table>
+        <apex:actionFunction action="{!InsertEvent}" name="passeventdetails" oncomplete="gotopt();"  reRender="garbage">
+<apex:param value="" name="stdte"/>
+<apex:param value="" name="edte"/>
+<apex:param value="" name="eml"/>
+
+</apex:actionFunction>
+
+<apex:actionFunction action="{!gotoOpt}" name="gotopt"  />
+
+
+    </apex:form>
+</div>
+
+
+
+
+
+</apex:page>

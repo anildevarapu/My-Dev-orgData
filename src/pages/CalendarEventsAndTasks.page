@@ -1,0 +1,791 @@
+<apex:page controller="CalendarViewOfTaskSAndEvents" showheader="false" sidebar="false">
+  <apex:stylesheet value="https://code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css" />
+    <apex:stylesheet value="https://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.1/jquery.qtip.min.css" />
+    <apex:stylesheet value="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.0/fullcalendar.min.css" />
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" />
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <apex:includeScript value="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js" />
+    <apex:includeScript value="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.0/fullcalendar.min.js " />
+    <apex:includeScript value="https://malsup.github.io/jquery.blockUI.js" />
+    <apex:includeScript value="https://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.1/jquery.qtip.min.js" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>    <style>
+    .hiddenEvent {
+        display: none;
+    }
+    .ui-state-default .ui-icon {
+       // background-image: url("images/ui-icons_ffffff_256x240.png");
+    }
+    
+    body .bPageBlock, body #bodyCell .bResource .secondaryPalette, body .secondaryPalette.bPageBlock, body .individualPalette .secondaryPalette.bPageBlock, body .bodyDiv .genericTable, body .genericPageBlockTable, body .bodyDiv .bSubBlock, body .bComponentBlock .bPageBlock, body .bMyDashboard .bPageBlock, body.rlHoverFrame .bPageBlock, body.subjectSelectionPopup div.choicesBox, body.lookupTab .secondaryPalette.bPageBlock, body.popupTab .secondaryPalette.bPageBlock, body.UserTagStatsPage .secondaryPalette.bPageBlock {
+    background-color: white;
+    border: 0px;
+    }
+   body .bEditBlock .pbBottomButtons, body .apexp .bPageBlock.apexDefaultPageBlock .pbBottomButtons {
+   border-top:0px;
+    }
+    
+    .apexp .bPageBlock.apexDefaultPageBlock .pbHeader>table, #ep.bLayoutBlock .pbHeader>table {
+        border-bottom: 0px;
+        border-top: 0px;
+    }
+    
+    h2{
+     font-size:18px;
+     font-weight:normal;
+     color:grey;
+    }
+    .ui-state-default .ui-icon {
+      
+       
+    }
+    
+    
+.ui-widget-content{
+
+background: whitesmoke;}
+.panel-heading {
+    padding: 0px 12px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+.panel-primary {
+    border-color: lightgrey;
+}
+
+
+  
+    .panel-primary>.panel-heading {
+    color: #fff;
+    background-color: lightgrey;
+    border-color: grey;
+    }
+    
+    //keep the shape of the boxes we're hiding
+    .fc-other-month {
+        visibility: hidden
+    }
+    .fc-toolbar .fc-state-active, .fc-toolbar .ui-state-active{
+    background:#ac3939;
+    }
+    .fc-toolbar button {
+    position: relative;
+    background: #00bfff;
+    color: white;
+    border-radius:5px;
+    }
+    
+    body button:hover, body .btn:hover, body .btnCancel:hover, body .menuButton .menuButtonButton:hover{
+    background:#253271;
+    }
+
+    .fc th {
+     padding:0px;
+     background:#00b386;
+     color:white;
+    }
+    </style>
+    <style>
+    #cal-options {
+        float: left;
+    }
+    
+    #cal-legend {
+        float: left;
+    }
+    
+    #cal-legend ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    
+    #cal-legend ul li {
+        margin: 0;
+        padding: 5px;
+        float: left;
+    }
+    
+    #cal-legend ul li span {
+        display: block;
+        height: 16px;
+        width: 16px;
+        margin-right: 4px;
+        float: left;
+        border-radius: 4px;
+    }
+    
+    #calendar {
+        margin-top: 0px;
+    }
+    
+    #calendar a:hover {
+        color: #fff !important;
+    }
+    
+    .fc-event-inner {
+        padding: 3px;
+    }
+    td{
+    padding-left:10px;
+    }
+    
+    .event-birthday {
+        background: #56458c;
+        border-color: #56458c;
+    }
+    
+    .event-campaign {
+        background: #cc9933;
+        border-color: #cc9933;
+    }
+    
+    .event-personal {
+        background: #1797c0;
+        border-color: #1797c0;
+    }
+    .formcontrol1 {
+        display: block;
+        width: 95%;
+        height: 100%;
+        min-height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        font-weight: normal;
+        background-color: #E6E6E6;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+        -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    }
+    .btnedit{
+        background: white !important;
+        padding: 1px 5px!important;
+        color:#253271 !important;
+        border-radius:7px!important;
+     
+     }
+     .apexp .bPageBlock.apexDefaultPageBlock .pbBody{
+        position:fixed;
+     }
+     
+    .panel-primary>.panel-heading {
+     
+     background-color: #ac3939;
+     }
+    </style>
+   <apex:form id="filters" style="    padding-left: 2px;padding-right: 15px;">
+    <div class="row" style="padding-left:0px;padding-right:10px;">
+        <div class="col-md-3 col-sm-3 col-xs-12">
+            <div id="viewAs" class="left-radio-filter panel panel-primary">
+                <div class="filter-view-header panel-heading"><span id="view-header">View As</span></div>
+                <!-- <div id="Team_view" class="viewAs">
+                    <apex:selectRadio value="{!viewtype}" onchange="reloadCal();" >
+                        <apex:selectOptions value="{!items}" />
+                        <span><i class="fa fa-user"></i></span>
+                        <span><i class="fa fa-users"></i></span>
+                    </apex:selectRadio>
+                </div>-->
+                <!--Start-->
+                <div class="viewAs" id="Team_view">
+                <fieldset style="border: none;"><table role="presentation">
+                    <tbody><tr>
+                <td>
+                <input type="radio" checked="checked" title="Show My View" name="j_id0:j_id1:j_id2:filters:j_id14" id="j_id0:j_id1:j_id2:filters:j_id14:0" value="My View" onchange="reloadCal();"/><label for="j_id0:j_id1:j_id2:filters:j_id14:0"><i class="fa fa-user"></i></label></td>
+                <td>
+                <input type="radio" title="Show Team View" name="j_id0:j_id1:j_id2:filters:j_id14" id="j_id0:j_id1:j_id2:filters:j_id14:1" value="Team View" onchange="reloadCal();"/><label for="j_id0:j_id1:j_id2:filters:j_id14:1"><i class="fa fa-users"></i></label></td>
+                  
+            <div id="cal-legend">
+                <ul>
+                    <li>
+                        <apex:commandLink status="ajaxldr" action="{!ToggleCalendar}" reRender="clndrpnl,frm,rlde,fltrepeat" onmouseout="this.style.textDecoration='initial';this.style.color='black';" onmouseover="this.style.textDecoration='underline';" style="text-decoration: blink;font-weight: bold;" value="Events">
+                            <apex:param name="evnt" value="{!EvntSel}" assignTo="{!SelectedObj}" />
+                        </apex:commandLink>
+                        <span><i class="fa fa-th"></i></span></li>
+                    
+                    <li>
+                        <apex:commandLink status="ajaxldr" action="{!ToggleCalendar}" reRender="clndrpnl,frm,rlde,fltrepeat" onmouseout="this.style.textDecoration='initial';this.style.color='black';" onmouseover="this.style.textDecoration='underline';" style="text-decoration: blink;font-weight: bold;" value="Tasks">
+                            <apex:param name="evnt" value="{!TaskSel}" assignTo="{!SelectedObj}" />
+                        </apex:commandLink>
+                        <span><i class="fa fa-tasks"></i></span></li>
+                </ul>
+                <div style="clear:both;">
+                    <!--fix floats-->
+                </div>
+            </div> 
+                    </tr>
+</tbody></table></fieldset>
+                </div>
+                
+                <!--End-->
+            </div>
+        </div>
+        <!-- -->
+
+      <!--  <div class="col-md-1 col-sm-1 colxs-12">
+            <div id="cal-legend">
+                <ul>
+                    <li>
+                        <apex:commandLink status="ajaxldr" action="{!ToggleCalendar}" reRender="clndrpnl,frm,rlde,fltrepeat" onmouseout="this.style.textDecoration='initial';this.style.color='black';" onmouseover="this.style.textDecoration='underline';" style="text-decoration: blink;font-weight: bold;" value="Events">
+                            <apex:param name="evnt" value="{!EvntSel}" assignTo="{!SelectedObj}" />
+                        </apex:commandLink>
+                        <span><i class="fa fa-th"></i></span></li>
+                    
+                    <li>
+                        <apex:commandLink status="ajaxldr" action="{!ToggleCalendar}" reRender="clndrpnl,frm,rlde,fltrepeat" onmouseout="this.style.textDecoration='initial';this.style.color='black';" onmouseover="this.style.textDecoration='underline';" style="text-decoration: blink;font-weight: bold;" value="Tasks">
+                            <apex:param name="evnt" value="{!TaskSel}" assignTo="{!SelectedObj}" />
+                        </apex:commandLink>
+                        <span><i class="fa fa-tasks"></i></span></li>
+                </ul>
+                <div style="clear:both;">
+                    <!--fix floats-->
+ <!--               </div>
+            </div>  -->
+    </div>
+</apex:form>
+<!-- Calendar is rendered here by the fullcalendar Javascript -->
+<div class="row">
+<div class="col-md-9 col-sm-9 col-xs-9" >
+            <apex:outputPanel id="clndrpnl">
+                <div id='calendar' style="padding:0px;"/>
+            </apex:outputPanel>
+          </div>
+ <div class="col-md-3 col-sm-3 col-xs-3" style="padding-left:0px;">
+            <apex:form id="frm">
+                <div id="dialog">
+                    <apex:outputpanel id="EditEvntOrTask">
+                    
+                        <apex:pageBlock tabStyle="event" rendered="{!ShowRecentItems}">
+                            <legend style="color:white;font-weight:150;padding-left:8px;margin-bottom:0px;font-size:16px;border-radius:4px;background:#00b386;"><span>Recent Events/Tasks</span>
+                                
+                            </legend>
+                            <apex:pageblocksection > 
+                            
+                            <apex:outputpanel >
+                                <apex:outputlabel value="Subject"/><br/>
+                                
+                            </apex:outputpanel><br/> 
+                            </apex:pageblocksection>                           
+                        </apex:pageBlock> 
+                    
+                    
+                    
+                    <!-- Event Information PageBlock -->
+                        <apex:pageBlock tabStyle="event" rendered="{!showevnt}">
+                            <apex:pageMessages />
+                            <legend style="color:white;font-weight:150;padding-left:8px;margin-bottom:0px;font-size:16px;border-radius:4px;background:#00b386;"><span>Event Information</span>
+                            <apex:commandButton status="ajaxldr"  action="{!ToggleEditViewOfEvent}" title="Edit" reRender="frm,rlde" value="Edit"  styleclass="btnedit" />
+                             </legend>
+                              <apex:pageblocksection >  
+                               <apex:outputpanel >
+                                <apex:outputlabel value="Subject"/><br/>
+                                <apex:outputField value="{!evt.Subject}" styleclass="formcontrol1"/>
+                               </apex:outputpanel><br/>
+                                <apex:outputpanel >
+                                <apex:outputlabel value="Start Time"/><br/>
+                                <apex:outputField value="{!evt.StartDateTime}" styleclass="formcontrol1"/>
+                               </apex:outputpanel><br/>
+                               <apex:outputpanel > 
+                                <apex:outputlabel value="End Time"/><br/>
+                                <apex:outputField value="{!evt.EndDateTime}" styleclass="formcontrol1"/>
+                               </apex:outputpanel> <br/>
+                               <apex:outputpanel >
+                                <apex:outputlabel value="Type"/><br/>
+                                <apex:outputField value="{!evt.Type}" styleclass="formcontrol1"/>
+                               </apex:outputpanel> <br/>
+                               <apex:outputpanel > 
+                                <apex:outputlabel value="Duration"/><br/>
+                                <apex:outputField value="{!evt.DurationInMinutes}" styleclass="formcontrol1"/>
+                               </apex:outputpanel> <br/>
+                               <apex:outputpanel > 
+                                <apex:outputlabel value="Description"/><br/>
+                                <apex:outputField value="{!evt.Description}" styleclass="formcontrol1"/>
+                               </apex:outputpanel><br/> 
+                           </apex:pageblocksection>                             
+                            </apex:pageBlock> 
+                            
+                            <!--End of Event Information PageBlock -->
+                            
+                            <!--EDIT Event Information PageBlock -->
+                            <apex:pageBlock tabStyle="event" rendered="{!ShowEditViewOfEvents}">
+                                
+                                <legend style="color:white;font-weight:150;padding-left:8px;margin-bottom:0px;font-size:16px;border-radius:4px;background:#00b386;"><span>Edit Event Information</span>
+                                    
+                                    <apex:commandButton status="ajaxldr"  action="{!UpdateEvt}" title="Save" reRender="clndrpnl,frm,rlde" value="Save" styleclass="btnedit"/>
+                                    <apex:commandButton status="ajaxldr"  action="{!CancelUpdate}" styleclass="btnedit" title="Cancel" reRender="clndrpnl,frm,rlde" value="Cancel" /> 
+                                </legend>
+                                <apex:pageblocksection >  
+                                    <apex:outputpanel >
+                                        <apex:outputlabel value="Subject"/><br/>
+                                        <apex:inputField value="{!evt.Subject}" styleclass="formcontrol1"/>
+                                    </apex:outputpanel><br/>
+                                    <apex:outputpanel >
+                                        <apex:outputlabel value="Start Time"/><br/>
+                                        <apex:inputField value="{!evt.StartDateTime}" styleclass="formcontrol1"/>
+                                    </apex:outputpanel><br/>
+                                    <apex:outputpanel > 
+                                        <apex:outputlabel value="End Time"/><br/>
+                                        <apex:inputField value="{!evt.EndDateTime}" styleclass="formcontrol1"/>
+                                    </apex:outputpanel> <br/>
+                                    <apex:outputpanel >
+                                        <apex:outputlabel value="Type"/><br/>
+                                        <apex:inputField value="{!evt.Type}" styleclass="formcontrol1"/>
+                                    </apex:outputpanel> <br/>
+                                    <apex:outputpanel > 
+                                        <apex:outputlabel value="Duration"/><br/>
+                                        <apex:inputField value="{!evt.DurationInMinutes}" styleclass="formcontrol1"/>
+                                    </apex:outputpanel> <br/>
+                                    <apex:outputpanel > 
+                                        <apex:outputlabel value="Description"/><br/>
+                                        <apex:inputField value="{!evt.Description}" styleclass="formcontrol1"/>
+                                    </apex:outputpanel><br/> 
+                                </apex:pageblocksection>                           
+                            <!--    <apex:commandButton action="{!CancelUpdate}" title="Cancel" reRender="clndrpnl,frm,rlde" value="Cancel" /> -->
+                           
+                        </apex:pageBlock>
+                        <!--End of EDIT Event Information PageBlock -->
+                        
+                        <!--Task Information PageBlock -->
+                        <apex:pageBlock tabStyle="Task" rendered="{!showtask}">
+                            <apex:pageMessages />
+                            <legend style="color:white;font-weight:150;padding-left:8px;margin-bottom:0px;font-size:16px;border-radius:4px;background:#00b386;"><span>Task Information</span>
+                                
+                          <apex:commandButton status="ajaxldr"  action="{!ToggleEditViewOfTasks}" styleclass="btnedit" title="Edit" reRender="frm,rlde" value="Edit" />
+                            
+                                </legend>
+                             <apex:pageblocksection >
+                              <apex:outputpanel >
+                                <apex:outputlabel value="Subject"/><br/> 
+                                <apex:outputField value="{!tskobj.Subject}" styleclass="formcontrol1"/>
+                                </apex:outputpanel><br/>
+                                 <apex:outputpanel >
+                                <apex:outputlabel value="Due Date"/><br/>
+                                <apex:outputField value="{!tskobj.ActivityDate}" styleclass="formcontrol1" />
+                                </apex:outputpanel><br/>
+                                 <apex:outputpanel >
+                                <apex:outputlabel value="Status"/><br/>
+                                <apex:outputField value="{!tskobj.Status}" styleclass="formcontrol1"/>
+                                </apex:outputpanel><br/>
+                                 <apex:outputpanel >
+                                <apex:outputlabel value="Priority"/><br/>
+                                <apex:outputField value="{!tskobj.Priority}" styleclass="formcontrol1"/>
+                                </apex:outputpanel><br/>
+                                 <apex:outputpanel >
+                                <apex:outputlabel value="Type"/><br/>
+                                <apex:outputField value="{!tskobj.Type}" styleclass="formcontrol1"/>
+                                </apex:outputpanel><br/>
+                                 <apex:outputpanel >
+                                <apex:outputlabel value="Description"/><br/>
+                                <apex:outputField value="{!tskobj.Description}" styleclass="formcontrol1"/>
+                                </apex:outputpanel><br/>
+                            </apex:pageBlockSection>
+                           <apex:pageBlockButtons >
+                              
+                          
+                            </apex:pageBlockButtons> 
+                        </apex:pageBlock>
+                        <!--END Of Task Information PageBlock -->
+                        
+                        
+                        <!-- EDIT Task Information PageBlock -->
+                        <apex:pageBlock tabStyle="Task" rendered="{!ShowEditViewOfTasks}">
+                            <apex:pageMessages />
+                            <legend style="color:white;font-weight:150;padding-left:8px;margin-bottom:0px;font-size:16px;border-radius:4px;background:#00b386;"><span>Task Information</span>
+                                
+                                <apex:commandButton status="ajaxldr"  styleclass="btnedit" action="{!Updatetasks}" title="Save" reRender="clndrpnl,frm,rlde" value="Save" />
+                                <apex:commandButton status="ajaxldr"  styleclass="btnedit" action="{!CancelUpdate}" title="Cancel" reRender="clndrpnl,frm,rlde" value="Cancel" />
+                            </legend>
+                            <apex:pageblocksection >
+                                <apex:outputpanel >
+                                    <apex:outputlabel value="Subject"/><br/> 
+                                    <apex:inputField value="{!tskobj.Subject}" styleclass="formcontrol1"/>
+                                </apex:outputpanel><br/>
+                                <apex:outputpanel >
+                                    <apex:outputlabel value="Due Date"/><br/>
+                                    <apex:inputField value="{!tskobj.ActivityDate}" styleclass="formcontrol1" />
+                                </apex:outputpanel><br/>
+                                <apex:outputpanel >
+                                    <apex:outputlabel value="Status"/><br/>
+                                    <apex:inputField value="{!tskobj.Status}" styleclass="formcontrol1"/>
+                                </apex:outputpanel><br/>
+                                <apex:outputpanel >
+                                    <apex:outputlabel value="Priority"/><br/>
+                                    <apex:inputField value="{!tskobj.Priority}" styleclass="formcontrol1"/>
+                                </apex:outputpanel><br/>
+                                <apex:outputpanel >
+                                    <apex:outputlabel value="Type"/><br/>
+                                    <apex:inputField value="{!tskobj.Type}" styleclass="formcontrol1"/>
+                                </apex:outputpanel><br/>
+                                <apex:outputpanel >
+                                    <apex:outputlabel value="Description"/><br/>
+                                    <apex:inputField value="{!tskobj.Description}" styleclass="formcontrol1"/>
+                                </apex:outputpanel><br/>
+                            </apex:pageBlockSection>
+                            <apex:pageBlockButtons ></apex:pageBlockButtons> 
+                            
+                                
+                            
+                        </apex:pageBlock>
+                        <!--END of EDIT Task Information PageBlock -->
+                        
+
+
+
+ <!-- START Of Recently Modified Task -->
+            
+                        <apex:pageBlock rendered="{!ShowRecentTask}">
+              
+                <legend style="color:white;font-weight:150;padding-left:8px;margin-top: -88px;margin-bottom:0px;font-size:16px;border-radius:4px;background:#00b386;"><span style="padding-left:6px;">Recently Modified Task</span></legend>
+                <div align="center">
+                    <apex:commandButton rendered="{!!CONTAINS($Profile.Name, 'MyDemos Profile')}" status="ajaxldr" action="{!RecentlymodEditViewOfTasks}" styleclass="btnedit" title="Edit" reRender="frm,rlde" value="Edit" /> 
+                </div><br/>
+                <apex:pageblocksection columns="1">
+                        <apex:outputField value="{!RecentlyModTask.Subject}" />
+                        <apex:outputField value="{!RecentlyModTask.ActivityDate}" />
+                        <apex:outputField value="{!RecentlyModTask.Status}" />
+                        <apex:outputField value="{!RecentlyModTask.Priority}" />
+                        <apex:outputField value="{!RecentlyModTask.Type}" />
+                        <apex:outputField value="{!RecentlyModTask.Description}" />
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+
+            <!-- End Of Recently Modified Task -->
+            
+            <!-- Start of Edit View Of Recently Modified Task -->
+
+            <apex:pageBlock tabStyle="Task" rendered="{!ShowRecentTaskEdit}">
+               
+                <legend style="color:white;font-weight:150;padding-left:8px;margin-top: -88px;margin-bottom:0px;font-size:16px;border-radius:4px;background:#00b386;"><span style="padding-left:6px;">Edit Task Information</span>
+                </legend>
+                <br/>
+                <div align="center">
+                    <apex:commandButton status="ajaxldr" styleclass="btnedit" action="{!UpdateRecentModtasks}" title="Save" reRender="clndrpnl,frm,rlde" value="Save" />
+                    <apex:commandButton status="ajaxldr" styleclass="btnedit" Onclick="reloadCal();return false;"  title="Cancel" reRender="clndrpnl,frm,rlde" value="Cancel" />
+                    <!-- action="{!CancelUpdate}" -->
+                </div><br/>
+                <apex:pageblocksection columns="1">
+                        <apex:inputField value="{!RecentlyModTask.Subject}" />
+                        <apex:inputField value="{!RecentlyModTask.ActivityDate}" />
+                        <apex:inputField value="{!RecentlyModTask.Status}" />
+                        <apex:inputField value="{!RecentlyModTask.Priority}" />
+                        <apex:inputField value="{!RecentlyModTask.Type}" />
+                        <apex:inputField value="{!RecentlyModTask.Description}" />
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+            <!-- End Of Recently Modified Task -->
+            
+                        <!-- Start Of Recently Modified Event-->
+            <apex:pageBlock rendered="{!ShowRecentEvent}">
+                
+                <legend style="color:white;font-weight:150;margin-top: -88px;margin-bottom:0px;font-size:16px;border-radius:4px;background:#00b386;"><span style="padding-left:6px;">Recently Modified Event</span>
+                </legend>
+                <br/>
+                <div align="center">
+                    <apex:commandButton rendered="{!!CONTAINS($Profile.Name, 'MyDemos Profile')}"  status="ajaxldr" action="{!RecentlymodEditViewOfEvents}" title="Edit" reRender="frm,rlde" value="Edit" styleclass="btnedit" />
+                </div><br/>
+                <apex:pageblocksection columns="1" >
+                        <apex:outputField value="{!RecentlyModEvent.Subject}" styleclass="formcontrol1" />
+                        <apex:outputField value="{!RecentlyModEvent.StartDateTime}" styleclass="formcontrol1" />
+                        <apex:outputField value="{!RecentlyModEvent.EndDateTime}" styleclass="formcontrol1" />
+                        <apex:outputField value="{!RecentlyModEvent.Type}" styleclass="formcontrol1" />
+                        <apex:outputField value="{!RecentlyModEvent.DurationInMinutes}" styleclass="formcontrol1" />
+                        <apex:outputField value="{!RecentlyModEvent.Description}" styleclass="formcontrol1" />
+                </apex:pageblocksection>
+            </apex:pageBlock>
+            <!--End Of Recently Modified Event  -->
+            
+            <!--Start of Edit View Of Recently Modified Event -->
+            <apex:pageBlock rendered="{!ShowRecentEventEdit}">
+                
+                <legend style="color:white;font-weight:150;padding-left:8px;margin-top: -88px;margin-bottom:0px;font-size:16px;border-radius:4px;background:#00b386;"><span style="padding-left:6px;">Edit Event Information</span>
+                </legend>
+                <br/>
+                <div align="center">
+                    <apex:commandButton status="ajaxldr" action="{!UpdateRecentModEvt}" title="Save" reRender="clndrpnl,frm,rlde" value="Save" styleclass="btnedit" />
+                    <apex:commandButton status="ajaxldr" Onclick="reloadCal();return false;"  styleclass="btnedit" title="Cancel" reRender="clndrpnl,frm,rlde" value="Cancel" />
+                </div><br/>
+                <apex:pageblocksection columns="1">
+                        <apex:inputField value="{!RecentlyModEvent.Subject}" />
+                        <apex:inputField value="{!RecentlyModEvent.StartDateTime}" />
+                        <apex:inputField value="{!RecentlyModEvent.EndDateTime}" />
+                        <apex:inputField value="{!RecentlyModEvent.Type}" />
+                        <apex:inputField value="{!RecentlyModEvent.DurationInMinutes}" />
+                        <apex:inputField value="{!RecentlyModEvent.Description}" />
+                </apex:pageblocksection>
+            </apex:pageBlock>
+            <!--End of Edit View Of Recently Modified Event -->
+
+
+
+
+                    </apex:outputpanel>
+                </div>
+                <div id="eventContent" title="Event Details" style="display:none;">
+                    <apex:inputField value="{!evt.Subject}" />
+                </div>
+                <apex:actionFunction status="ajaxldr" name="fetchevent" action="{!editevent}" reRender="frm">
+                    <apex:param value="" name="evntid" />
+                    <apex:param value="" name="sfobj" />
+                </apex:actionFunction>
+                <apex:actionFunction status="ajaxldr" name="filterallevents" action="{!filterevents}" reRender="clndrpnl,frm,rlde,">
+                    <apex:param value="" name="filterby" />
+                    <apex:param value="" name="changedview" assignto="{!viewtype}" />
+                </apex:actionFunction>
+                <!-- <apex:actionFunction name="changeviews" action="{!switchviews}" reRender="clndrpnl,frm,rlde">
+                        <apex:param value="" name="currentview" />
+                        <apex:param value="" name="swichview" assignto="{!viewtype}" />
+                    </apex:actionFunction> -->
+                <apex:actionStatus id="ajaxldr" onstart="blockoverlay();" onstop="$.unblockUI();" />
+            </apex:form>
+</div>
+</div>
+
+    <!-- Fullcalendar configuration plus event data supplied by controller -->
+    <script type="text/javascript" language="javascript">
+
+    $(document).ready(function() {
+//console.log('--all events-- ' + '{!Events}');
+           
+        locadclnr();
+       
+
+      
+
+    });
+
+
+    
+    function changeview(selectedrad){
+    
+    //alert('---Selected----'+selectedrad.value);
+    
+ $("input:radio").each(function () {
+
+    
+    var $this = $(this);
+
+    
+    if (this.checked) {
+        var src = this.value;
+        //alert(this.value);
+        
+    }
+
+})
+    
+    
+    
+    }
+    
+    function reloadCal() {
+        
+        var selectedItems = [];
+        var check = document.getElementsByName("fltr");
+        var fltrstring = '';
+        for (var i=0; i<check.length; i++) 
+         {
+           
+           if(check[i].checked==true){
+            selectedItems.push(check[i].value);
+            fltrstring = fltrstring+check[i].value+',';
+        }
+        }
+        var myval='';
+        $("input:radio").each(function () {
+
+    
+    var $this = $(this);
+
+    
+    if (this.checked) {
+        myval = this.value;
+        //alert(myval);
+        
+    }
+
+})
+        
+        console.log(selectedItems);
+        console.log('--fltrstring--'+fltrstring );
+        filterallevents(fltrstring,myval);
+
+    }
+    
+            function blockoverlay(){
+            $.blockUI({ css: { 
+            border: 'none', 
+            padding: '2px', 
+            backgroundColor: '#000', 
+            '-webkit-border-radius': '10px', 
+            '-moz-border-radius': '10px', 
+            opacity: .5, 
+            color: '#fff' 
+        } }); 
+        
+        }
+        
+
+
+    </script>
+    <apex:outputPanel id="rlde">
+        <script type="text/javascript" language="javascript">
+        function locadclnr() {
+
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'month,agendaWeek,agendaDay',
+                    center: 'title',
+                    right: 'prevYear prev,today,next nextYear'
+                },
+                defaultView: 'month',
+                allDaySlot:true,
+                eventLimit: true,
+                theme: true,
+                events: {!Events},
+                defaultDate: moment('2016-04-01'), //Setting a Default date cause i have events created in this month
+                eventRender: function(event, element) {
+                    element.attr('href', 'javascript:void(0);');
+                    element.click(function() {
+
+                        
+                        fetchevent(event.url,event.sobj);
+                        
+                        console.log(event.url);
+                       
+                        
+                        
+
+                    });
+                    
+                    
+                    if(event.sobj.toLowerCase()=='task'){
+           element.qtip({    
+            content: {    
+                title: { text: event.title },
+                
+                text: '<span class="title">Due Date: </span>' + moment(event.start).format('MM/DD/YYYY') +'<br><span class="title">Subject: </span>' + event.title
+
+
+            },
+            show: { solo: true,
+            
+                    effect: function() {
+                $(this).fadeTo(300, 1);
+            }, 
+            
+            
+            },
+            hide: {
+                fixed: true,
+                delay: 300,
+                effect: function() {
+                $(this).hide('scale', 300);
+            }
+            },
+            //hide: { when: 'inactive', delay: 3000 }, 
+            
+    position: {
+        my: 'center left',  
+        at: 'center right',
+        target: 'mouse',
+        
+        adjust: {
+        mouse: false,
+            x: 20
+        } 
+        
+    },
+            style: { 
+                width: 400,
+                padding: 5,
+                color: 'black',
+                textAlign: 'left',
+                border: {
+                width: 5,
+                radius: 8
+             },
+                
+                classes: 'qtip-dark qtip-shadow qtip-rounded',
+                 
+            } 
+        });
+                    }
+                    
+                                    
+                else if(event.sobj.toLowerCase()=='event'){
+                
+           element.qtip({    
+            content: {    
+                title: { text: event.title },
+                
+                text: '<span class="title">Start: </span>' + moment(event.start).format('MM/DD/YYYY hh:mm A') +'<br><span class="title">End: </span>'+moment(event.end).format('MM/DD/YYYY hh:mm A')+'<br><span class="title">Subject: </span>' + event.title
+
+
+            },
+            show: { solo: true,
+            
+                    effect: function() {
+                $(this).fadeTo(300, 1);
+            }, 
+            
+            
+            },
+            hide: {
+                fixed: true,
+                delay: 300,
+                effect: function() {
+                $(this).hide('scale', 300);
+            }
+            },
+            //hide: { when: 'inactive', delay: 3000 }, 
+            
+    position: {
+        my: 'center left',  
+        at: 'center right',
+        target: 'mouse',
+        
+        adjust: {
+        mouse: false,
+            x: 20
+        } 
+        
+    },
+            style: { 
+                width: 400,
+                padding: 5,
+                color: 'black',
+                textAlign: 'left',
+                border: {
+                width: 5,
+                radius: 8
+             },
+                
+                classes: 'qtip-dark qtip-shadow qtip-rounded',
+                 
+            } 
+        });
+                
+                }
+
+                    
+                },
+              
+    
+            });
+
+
+        console.log('-Event list In locadclnr--Func-- '+'{!Events}');
+        }
+
+        locadclnr();
+        </script>
+        
+    </apex:outputPanel>
+   </apex:page>

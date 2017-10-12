@@ -1,0 +1,5 @@
+<apex:page standardcontroller="Lead" extensions="OpenSMSPro.leadSendsmscls" tabStyle="Lead" id="page" sidebar="false">
+    <apex:form id="form">
+        <c:LeadSendSMSVC id="SMSComp" LeadInfo="{!Lead}"/>
+    </apex:form>
+</apex:page>

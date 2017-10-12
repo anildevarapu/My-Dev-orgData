@@ -1,0 +1,51 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes">
+  <!-- require -->
+  <ltng:require scripts="/resource/LCLDS_JQuery/dist/jquery.min.js
+                        ,/resource/LCLDS_BootstrapSF1/dist/js/docs.js"
+                 styles="/resource/LCLDS_BootstrapSF1/dist/css/bootstrap.min.css
+                        ,/resource/LCLDS_BootstrapSF1/dist/css/docs.min.css
+                        ,/resource/SLDS080/assets/styles/salesforce-lightning-design-system.css
+                        ,/resource/LCLDS_CommonCss" />
+  <!-- components -->
+  <div class="lclds">
+    <c:LCLDS_Header />
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9">
+          <div class="slds">
+            <c:LCLDS_SectionHeader title="Images" />
+            <span class="slds-avatar slds-avatar--x-small">
+              <img src="http://www.lightningdesignsystem.com/assets/images/company1.jpg" alt="company name" />
+            </span>
+            <span class="slds-avatar slds-avatar--small">
+              <img src="http://www.lightningdesignsystem.com/assets/images/company1.jpg" alt="company name" />
+            </span>
+            <span class="slds-avatar slds-avatar--medium">
+              <img src="http://www.lightningdesignsystem.com/assets/images/company1.jpg" alt="company name" />
+            </span>
+            <span class="slds-avatar slds-avatar--large">
+              <img src="http://www.lightningdesignsystem.com/assets/images/company1.jpg" alt="company name" />
+            </span>
+            <span class="slds-avatar slds-avatar--circle slds-avatar--x-small">
+              <img src="/resource/SLDS080/assets/images/avatar2.jpg" alt="person name" />
+            </span>
+            <span class="slds-avatar slds-avatar--circle slds-avatar--small">
+              <img src="/resource/SLDS080/assets/images/avatar2.jpg" alt="person name" />
+            </span>
+            <span class="slds-avatar slds-avatar--circle slds-avatar--medium">
+              <img src="/resource/SLDS080/assets/images/avatar2.jpg" alt="person name" />
+            </span>
+            <span class="slds-avatar slds-avatar--circle slds-avatar--large">
+              <img src="/resource/SLDS080/assets/images/avatar2.jpg" alt="person name" />
+            </span>
+            <!-- Margin -->
+            <div class="components-margin" />
+          </div><!-- ./slds end -->
+        </div>
+        <div class="col-md-3">
+          <c:LCLDS_SideMenu />
+        </div>
+      </div>
+    </div>
+  </div>
+</aura:component>

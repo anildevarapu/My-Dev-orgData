@@ -1,0 +1,5 @@
+<apex:page controller="OpenSMSPro.SendSmsCls" id="page" sidebar="false">
+    <apex:form id="form">
+        <c:SendSMSVC id="SendSMSid"/>
+    </apex:form>
+</apex:page>

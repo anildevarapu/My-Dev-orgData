@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <webLinks>
+        <fullName>Initiate_Chat</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Initiate Chat</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/21.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/21.0/apex.js&quot;)}
+var smsCount= 
+sforce.apex.execute(&quot;OpenSMSPro.SendSMSws&quot;,&quot;UpdateAlert&quot;,{countsms:1}); 
+if(parseInt(smsCount) &lt; 1){ 
+alert(&apos;You have no credits in your account. Please buy some credits to send sms.&apos;);
+}else{
+var queryResult = sforce.connection.query(&quot;Select Id,OpenSMSPro__SMS_Chat__c From OpenSMSPro__SMS_Gateway__C where OpenSMSPro__Default__c = true&quot;); 
+var IsSMSChatEnabled = queryResult[&apos;records&apos;][&apos;OpenSMSPro__SMS_Chat__c&apos;];
+if(IsSMSChatEnabled == &apos;true&apos;){
+	if({!Task.IsReminderSet} == true){ 
+		var name = window.location.hostname; 
+		var str = &apos;/apex/OpenSMSPro__SMSChat?id={!Task.Who}&amp;TskID={!Task.Id}&apos;; 
+
+		ChatWindow(&quot;https://&quot;+name+str, &quot;SMS Chat&quot;,350,450); 	 
+	}else{ 
+		//this.disabled=true; 
+		this.style.visibility=false; 
+		alert(&apos;Completed Chat cannot be Initiated&apos;); 
+	} 
+}else{ 
+	alert(&apos;SMS Chat is not enabled on your default SMS Gateway&apos;); 
+}
+}
+function ChatWindow(pageURL, title,w,h) { 
+	var left = (screen.width/2)-(w/2); 
+	var top = (screen.height/2)-(h/2); 
+	var targetWin = window.open (pageURL, title, &apos;toolbar=no, location=yes, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=&apos;+w+&apos;, height=&apos;+h+&apos;, top=&apos;+top+&apos;, left=&apos;+left); 
+	targetWin.focus(); 
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Send_SMS</fullName>
+        <availability>online</availability>
+        <description>To send SMS to Contact or Lead from Activity History</description>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Send SMS</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/29.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/29.0/apex.js&quot;)} 
+var smsCount = sforce.apex.execute(&quot;OpenSMSPro.SendSMSws&quot;,&quot;UpdateAlert&quot;,{countsms:1});
+if(parseInt(smsCount) &lt; 1){
+	alert(&apos;You have no credits in your account. Please buy some credits to send sms.&apos;);
+}else{
+	var url = parent.location.href; 
+	var ids = url.split(&quot;/&quot;);
+	var recordId = ids[3];
+	var res = recordId.split(&apos;?&apos;);
+
+	var result = sforce.apex.execute(&quot;OpenSMSPro.SendSMSws&quot;,&quot;redirectSMS&quot;,{strobjId:res[0]});
+	var name = window.location.hostname; 
+	if(result == 1){ 
+		alert(&apos;No default gateway. Please Configure your Gateway&apos;); 
+	}else if(result == 2){
+		alert(&apos;SMS Opt Out checked, Not possible to send SMS&apos;); 
+	}else if(result == 3){
+		var str = &apos;/apex/OpenSMSPro__contactsendsms?id=&apos; 
+		parent.location.href = &quot;https://&quot;+name+str+res[0]; 
+	}else if(result == 4){
+		var str = &apos;/apex/OpenSMSPro__leadsendsms?id=&apos; 
+		parent.location.href = &quot;https://&quot;+name+str+res[0]; 
+	}else if(result == 5){
+		var CaseId = res[0].split(&quot;#&quot;);;
+		var querystr = &apos;select ContactId from Case where Id=&apos;+&apos;\&apos;&apos;+CaseId[0]+&apos;\&apos;&apos;;
+		var queryResult = sforce.connection.query(querystr);
+		var ContactId=queryResult[&apos;records&apos;][&apos;ContactId&apos;]; 
+		if(ContactId!=null &amp;&amp; ContactId!=&apos;&apos; &amp;&amp; ContactId!=undefined){
+			var str=&apos;/apex/OpenSMSPro__contactsendsms?id=&apos;;
+			parent.location.href = &quot;https://&quot;+name+str+ContactId; 
+		}else{
+			alert(&apos;No Contact available on selected case&apos;);
+		}
+	}else if(result==6){ 	
+	var CampaignRecords = sforce.connection.query(&quot;Select ContactId, LeadId FROM CampaignMember WHERE CampaignId=&apos;&quot;+res[0]+&quot;&apos;&quot;);	
+	CampaignRecords.size = parseInt(CampaignRecords.size,10);				
+	if(CampaignRecords.size != 0){
+		if(CampaignRecords.size &gt; parseInt(smsCount) &amp;&amp; CampaignRecords.size != &apos;undefined&apos;){
+			alert(&apos;The number of records you have selected are more than the available messages&apos;);
+		}else{
+			var str = &apos;/apex/OpenSMSPro__Sendsms?id=&apos;+res[0]+&apos;&amp;mobile1=MobilePhone&amp;mobile2=MobilePhone&amp;sobject=Campaign&apos;;
+			parent.location.href = &quot;https://&quot;+name+str;	
+		}
+	}
+	
+}  
+}</url>
+    </webLinks>
+</CustomObject>

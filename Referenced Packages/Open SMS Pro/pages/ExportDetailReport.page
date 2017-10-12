@@ -1,0 +1,45 @@
+<apex:page controller="OpenSMSPro.DetailReport" contentType="txt/xml#{!selectedValue}_Report.xls" cache="false">
+    <apex:outputText value="{!xlsHeader}"/>
+    <Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel"
+    xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:html="http://www.w3.org/TR/REC-html40">
+        <Styles>
+            <Style ss:ID="s1">
+                <Alignment/>
+                <Borders> 
+                    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+                    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+                    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+                    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+                </Borders>
+                <Font ss:Bold="1"/>
+                <Interior ss:Color="#d5ddf3" ss:Pattern="Solid"/>
+                <NumberFormat/>
+                <Protection/>
+            </Style>
+            <Style ss:ID="s2"> 
+                <Font ss:Bold="1"/> 
+                <Interior ss:Color="#E0E0E0" ss:Pattern="Solid"/>
+            </Style> 
+        </Styles>                       
+         <Worksheet ss:Name="{!selectedValue} Report">
+          <Table x:FullColumns="1" x:FullRows="1">
+              <Column ss:Width="200"/>
+              <Column ss:Width="100"/>
+              <Column ss:Width="100"/>
+              <Column ss:Width="100"/>
+              <Column ss:Width="100"/>
+              <Column ss:Width="100"/>
+              <Row>
+                 <Cell ss:StyleID="s1"><Data ss:Type="String" >UserName</Data></Cell>
+                 <Cell ss:StyleID="s1"><Data ss:Type="String" >Single SMS</Data></Cell>
+                 <Cell ss:StyleID="s1"><Data ss:Type="String" >Bulk SMS</Data></Cell>
+                 <Cell ss:StyleID="s1"><Data ss:Type="String" >SMS Chat</Data></Cell>
+                 <Cell ss:StyleID="s1"><Data ss:Type="String" >Incoming SMS</Data></Cell>
+                 <Cell ss:StyleID="s1"><Data ss:Type="String" >Total SMS</Data></Cell>
+             </Row>             
+             <apex:outputText value="{!htmlCode}"/>                                     
+         </Table>
+        </Worksheet>
+            
+    </Workbook>
+</apex:page>

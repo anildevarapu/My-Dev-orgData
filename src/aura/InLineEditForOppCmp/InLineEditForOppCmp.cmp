@@ -1,0 +1,6 @@
+<aura:component controller="massUpdateApexCon">
+<aura:handler name="init" value="{!this}" action="{!c.loadOppertunities}"/>
+   <aura:iteration items="{!v.opportunities}" var="obj">
+   {!obj.Name}, {!obj.id}
+ </aura:iteration>
+</aura:component>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>MessageID__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Message ID</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>MobileNo__c</fullName>
+        <deprecated>false</deprecated>
+        <description>This field is used to store MobileNo while Sending an SMS to a user</description>
+        <externalId>false</externalId>
+        <label>Mobile No</label>
+        <required>false</required>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Replied__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Replied</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SMS_Parts__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>SMS Parts</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SMS_Status__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>SMS Status</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Success</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Failure</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Send_SMS__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>To intimate user through SMS , Check this.</inlineHelpText>
+        <label>Send SMS Notification</label>
+        <type>Checkbox</type>
+    </fields>
+</CustomObject>

@@ -1,0 +1,5 @@
+<apex:page id="pg" controller="OpenSMSPro.InsertData" sidebar="false">
+<apex:form id="fm"> 
+        <c:InsertDataVC id="InsertDataVC"/>
+    </apex:form>
+</apex:page>

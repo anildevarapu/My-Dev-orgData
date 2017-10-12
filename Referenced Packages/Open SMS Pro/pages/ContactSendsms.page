@@ -1,0 +1,5 @@
+<apex:page standardcontroller="Contact" extensions="OpenSMSPro.contactSendSmsCls" tabStyle="Contact" id="page" sidebar="false">
+    <apex:form id="form">
+        <c:ContactSendSMSVC id="ContactSMS" ContactInfo="{!Contact}" />
+    </apex:form>
+</apex:page>

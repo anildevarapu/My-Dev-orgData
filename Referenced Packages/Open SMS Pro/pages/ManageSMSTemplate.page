@@ -1,0 +1,5 @@
+<apex:page id="pg" standardController="OpenSMSPro__SMS_Template__c" showheader="true" sidebar="false">
+    <apex:form id="fm" >
+        <c:ManageSMSTemplateVC id="MSTVC"/>
+    </apex:form>
+</apex:page>

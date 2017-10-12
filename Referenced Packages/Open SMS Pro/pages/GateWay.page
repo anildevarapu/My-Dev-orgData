@@ -1,0 +1,5 @@
+<apex:page standardcontroller="OpenSMSPro__SMS_Gateway__c" extensions="OpenSMSPro.gateWayCon" id="page" sideBar="false">
+    <apex:form id="form">
+        <c:GatewayVC id="GWVC"/>    
+    </apex:form>
+</apex:page>

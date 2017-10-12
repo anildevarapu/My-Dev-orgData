@@ -1,0 +1,4 @@
+<apex:page action="{!Save}" controller="OpenSMSPro.PushNotification">
+ <apex:form >   
+  </apex:form>
+</apex:page>

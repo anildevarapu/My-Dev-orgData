@@ -1,0 +1,535 @@
+<apex:page sidebar="false">
+<!-- <apex:stylesheet value="{!URLFOR($Resource.OpenSMS_Base, 'css/base.css')}"/> -->
+    <apex:stylesheet value="{!URLFOR($Resource.OpenSMSPro__OpenSMS_Base, 'CSS/opensms.css')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.OpenSMSPro__OpenSMS_Base, 'CSS/reveal.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.OpenSMSPro__OpenSMS_Base, 'CSS/contentslider.css')}" />
+    <apex:includeScript value="{!URLFOR($Resource.OpenSMSPro__OpenSMS_Base, 'JS/ddaccordion.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.OpenSMSPro__OpenSMS_Base, 'JS/jquery.min.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.OpenSMSPro__OpenSMS_Base, 'JS/jquery.reveal.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.OpenSMSPro__OpenSMS_Base, 'JS/contentslider.js')}" />
+    <script>
+//Initialize 1st demo:
+ddaccordion.init({
+    headerclass: "technology", //Shared CSS class name of headers group
+    contentclass: "thelanguage", //Shared CSS class name of contents group
+    revealtype: "click", //Reveal content when user clicks or onmouseover the header? Valid value: "click", "clickgo", or "mouseover"
+    mouseoverdelay: 200, //if revealtype="mouseover", set delay in milliseconds before header expands onMouseover
+    collapseprev: true, //Collapse previous content (so only one open at any time)? true/false 
+    defaultexpanded: [0], //index of content(s) open by default [index1, index2, etc]. [] denotes no content.
+    onemustopen: true, //Specify whether at least one header should be open always (so never all headers closed)
+    animatedefault: false, //Should contents open by default be animated into view?
+    persiststate: false, //persist state of opened contents within browser session?
+    toggleclass: ["closedlanguage", "openlanguage"], //Two CSS classes to be applied to the header when it's collapsed and expanded, respectively ["class1", "class2"]
+    togglehtml: ["prefix", "<img src='{!$Resource.OpenSMS_Base}/ConfigImage/close_icon.png' style='width:12px; height:12px; float:right; margin-top:6px;' /> ", "<img src='{!$Resource.OpenSMS_Base}/ConfigImage/open_icon.png' style='width:12px; height:12px; float:right; margin-top:6px;' />  "], //Additional HTML added to the header when it's collapsed and expanded, respectively  ["position", "html1", "html2"] (see docs)
+    animatespeed: "fast", //speed of animation: integer in milliseconds (ie: 200), or keywords "fast", "normal", or "slow"
+    oninit:function(expandedindices){ //custom code to run when headers have initalized
+        //do nothing
+    },
+    onopenclose:function(header, index, state, isuseractivated){ //custom code to run whenever a header is opened or closed
+        //do nothing
+    }
+})
+
+//Initialize 2nd demo:
+ddaccordion.init({
+    headerclass: "technology1", //Shared CSS class name of headers group
+    contentclass: "thelanguage1", //Shared CSS class name of contents group
+    revealtype: "click", //Reveal content when user clicks or onmouseover the header? Valid value: "click", "clickgo", or "mouseover"
+    mouseoverdelay: 200, //if revealtype="mouseover", set delay in milliseconds before header expands onMouseover
+    collapseprev: true, //Collapse previous content (so only one open at any time)? true/false 
+    defaultexpanded: [0], //index of content(s) open by default [index1, index2, etc]. [] denotes no content.
+    onemustopen: true, //Specify whether at least one header should be open always (so never all headers closed)
+    animatedefault: false, //Should contents open by default be animated into view?
+    persiststate: false, //persist state of opened contents within browser session?
+    toggleclass: ["closedlanguage", "openlanguage"], //Two CSS classes to be applied to the header when it's collapsed and expanded, respectively ["class1", "class2"]
+    togglehtml: ["prefix", "<img src='{!$Resource.OpenSMS_Base}/ConfigImage/close_icon.png' style='width:12px; height:12px; float:right; margin-top:6px;' /> ", "<img src='{!$Resource.OpenSMS_Base}/ConfigImage/open_icon.png' style='width:12px; height:12px; float:right; margin-top:6px;' />  "], //Additional HTML added to the header when it's collapsed and expanded, respectively  ["position", "html1", "html2"] (see docs)
+    animatespeed: "fast", //speed of animation: integer in milliseconds (ie: 200), or keywords "fast", "normal", or "slow"
+    oninit:function(expandedindices){ //custom code to run when headers have initalized
+        //do nothing
+    },
+    onopenclose:function(header, index, state, isuseractivated){ //custom code to run whenever a header is opened or closed
+        //do nothing
+    }
+})
+
+//Initialize 3rd demo:
+ddaccordion.init({
+    headerclass: "technology2", //Shared CSS class name of headers group
+    contentclass: "thelanguage2", //Shared CSS class name of contents group
+    revealtype: "click", //Reveal content when user clicks or onmouseover the header? Valid value: "click", "clickgo", or "mouseover"
+    mouseoverdelay: 200, //if revealtype="mouseover", set delay in milliseconds before header expands onMouseover
+    collapseprev: true, //Collapse previous content (so only one open at any time)? true/false 
+    defaultexpanded: [0], //index of content(s) open by default [index1, index2, etc]. [] denotes no content.
+    onemustopen: true, //Specify whether at least one header should be open always (so never all headers closed)
+    animatedefault: false, //Should contents open by default be animated into view?
+    persiststate: false, //persist state of opened contents within browser session?
+    toggleclass: ["closedlanguage", "openlanguage"], //Two CSS classes to be applied to the header when it's collapsed and expanded, respectively ["class1", "class2"]
+    togglehtml: ["prefix", "<img src='{!$Resource.OpenSMS_Base}/ConfigImage/close_icon.png' style='width:12px; height:12px; float:right; margin-top:6px;' /> ", "<img src='{!$Resource.OpenSMS_Base}/ConfigImage/open_icon.png' style='width:12px; height:12px; float:right; margin-top:6px;' />  "], //Additional HTML added to the header when it's collapsed and expanded, respectively  ["position", "html1", "html2"] (see docs)
+    animatespeed: "fast", //speed of animation: integer in milliseconds (ie: 200), or keywords "fast", "normal", or "slow"
+    oninit:function(expandedindices){ //custom code to run when headers have initalized
+        //do nothing
+    },
+    onopenclose:function(header, index, state, isuseractivated){ //custom code to run whenever a header is opened or closed
+        //do nothing
+    }
+})
+
+//Initialize 4th demo:
+ddaccordion.init({
+    headerclass: "technology3", //Shared CSS class name of headers group
+    contentclass: "thelanguage3", //Shared CSS class name of contents group
+    revealtype: "click", //Reveal content when user clicks or onmouseover the header? Valid value: "click", "clickgo", or "mouseover"
+    mouseoverdelay: 200, //if revealtype="mouseover", set delay in milliseconds before header expands onMouseover
+    collapseprev: true, //Collapse previous content (so only one open at any time)? true/false 
+    defaultexpanded: [0], //index of content(s) open by default [index1, index2, etc]. [] denotes no content.
+    onemustopen: true, //Specify whether at least one header should be open always (so never all headers closed)
+    animatedefault: false, //Should contents open by default be animated into view?
+    persiststate: false, //persist state of opened contents within browser session?
+    toggleclass: ["closedlanguage", "openlanguage"], //Two CSS classes to be applied to the header when it's collapsed and expanded, respectively ["class1", "class2"]
+    togglehtml: ["prefix", "<img src='{!$Resource.OpenSMS_Base}/ConfigImage/close_icon.png' style='width:12px; height:12px; float:right; margin-top:6px;' /> ", "<img src='{!$Resource.OpenSMS_Base}/ConfigImage/open_icon.png' style='width:12px; height:12px; float:right; margin-top:6px;' />  "], //Additional HTML added to the header when it's collapsed and expanded, respectively  ["position", "html1", "html2"] (see docs)
+    animatespeed: "fast", //speed of animation: integer in milliseconds (ie: 200), or keywords "fast", "normal", or "slow"
+    oninit:function(expandedindices){ //custom code to run when headers have initalized
+        //do nothing
+    },
+    onopenclose:function(header, index, state, isuseractivated){ //custom code to run whenever a header is opened or closed
+        //do nothing
+    }
+})
+
+//Initialize 5th demo:
+ddaccordion.init({
+    headerclass: "technology4", //Shared CSS class name of headers group
+    contentclass: "thelanguage4", //Shared CSS class name of contents group
+    revealtype: "click", //Reveal content when user clicks or onmouseover the header? Valid value: "click", "clickgo", or "mouseover"
+    mouseoverdelay: 200, //if revealtype="mouseover", set delay in milliseconds before header expands onMouseover
+    collapseprev: true, //Collapse previous content (so only one open at any time)? true/false 
+    defaultexpanded: [0], //index of content(s) open by default [index1, index2, etc]. [] denotes no content.
+    onemustopen: true, //Specify whether at least one header should be open always (so never all headers closed)
+    animatedefault: false, //Should contents open by default be animated into view?
+    persiststate: false, //persist state of opened contents within browser session?
+    toggleclass: ["closedlanguage", "openlanguage"], //Two CSS classes to be applied to the header when it's collapsed and expanded, respectively ["class1", "class2"]
+    togglehtml: ["prefix", "<img src='{!$Resource.OpenSMS_Base}/ConfigImage/close_icon.png' style='width:12px; height:12px; float:right; margin-top:6px;' /> ", "<img src='{!$Resource.OpenSMS_Base}/ConfigImage/open_icon.png' style='width:12px; height:12px; float:right; margin-top:6px;' />  "], //Additional HTML added to the header when it's collapsed and expanded, respectively  ["position", "html1", "html2"] (see docs)
+    animatespeed: "fast", //speed of animation: integer in milliseconds (ie: 200), or keywords "fast", "normal", or "slow"
+    oninit:function(expandedindices){ //custom code to run when headers have initalized
+        //do nothing
+    },
+    onopenclose:function(header, index, state, isuseractivated){ //custom code to run whenever a header is opened or closed
+        //do nothing
+    }
+})
+
+//Initialize 6th demo:
+ddaccordion.init({
+    headerclass: "technology5", //Shared CSS class name of headers group
+    contentclass: "thelanguage5", //Shared CSS class name of contents group
+    revealtype: "click", //Reveal content when user clicks or onmouseover the header? Valid value: "click", "clickgo", or "mouseover"
+    mouseoverdelay: 200, //if revealtype="mouseover", set delay in milliseconds before header expands onMouseover
+    collapseprev: true, //Collapse previous content (so only one open at any time)? true/false 
+    defaultexpanded: [0], //index of content(s) open by default [index1, index2, etc]. [] denotes no content.
+    onemustopen: true, //Specify whether at least one header should be open always (so never all headers closed)
+    animatedefault: false, //Should contents open by default be animated into view?
+    persiststate: false, //persist state of opened contents within browser session?
+    toggleclass: ["closedlanguage", "openlanguage"], //Two CSS classes to be applied to the header when it's collapsed and expanded, respectively ["class1", "class2"]
+    togglehtml: ["prefix", "<img src='{!$Resource.OpenSMS_Base}/ConfigImage/close_icon.png' style='width:12px; height:12px; float:right; margin-top:6px;' /> ", "<img src='{!$Resource.OpenSMS_Base}/ConfigImage/open_icon.png' style='width:12px; height:12px; float:right; margin-top:6px;' />  "], //Additional HTML added to the header when it's collapsed and expanded, respectively  ["position", "html1", "html2"] (see docs)
+    animatespeed: "fast", //speed of animation: integer in milliseconds (ie: 200), or keywords "fast", "normal", or "slow"
+    oninit:function(expandedindices){ //custom code to run when headers have initalized
+        //do nothing
+    },
+    onopenclose:function(header, index, state, isuseractivated){ //custom code to run whenever a header is opened or closed
+        //do nothing
+    }
+})
+//Initialize 7th demo:
+ddaccordion.init({
+    headerclass: "technology6", //Shared CSS class name of headers group
+    contentclass: "thelanguage6", //Shared CSS class name of contents group
+    revealtype: "click", //Reveal content when user clicks or onmouseover the header? Valid value: "click", "clickgo", or "mouseover"
+    mouseoverdelay: 200, //if revealtype="mouseover", set delay in milliseconds before header expands onMouseover
+    collapseprev: true, //Collapse previous content (so only one open at any time)? true/false 
+    defaultexpanded: [0], //index of content(s) open by default [index1, index2, etc]. [] denotes no content.
+    onemustopen: true, //Specify whether at least one header should be open always (so never all headers closed)
+    animatedefault: false, //Should contents open by default be animated into view?
+    persiststate: false, //persist state of opened contents within browser session?
+    toggleclass: ["closedlanguage", "openlanguage"], //Two CSS classes to be applied to the header when it's collapsed and expanded, respectively ["class1", "class2"]
+    togglehtml: ["prefix", "<img src='{!$Resource.OpenSMS_Base}/ConfigImage/close_icon.png' style='width:12px; height:12px; float:right; margin-top:6px;' /> ", "<img src='{!$Resource.OpenSMS_Base}/ConfigImage/open_icon.png' style='width:12px; height:12px; float:right; margin-top:6px;' />  "], //Additional HTML added to the header when it's collapsed and expanded, respectively  ["position", "html1", "html2"] (see docs)
+    animatespeed: "fast", //speed of animation: integer in milliseconds (ie: 200), or keywords "fast", "normal", or "slow"
+    oninit:function(expandedindices){ //custom code to run when headers have initalized
+        //do nothing
+    },
+    onopenclose:function(header, index, state, isuseractivated){ //custom code to run whenever a header is opened or closed
+        //do nothing
+    }
+})
+
+</script>
+
+    <!-- popup -->
+    <style type="text/css">
+.big-link {
+    display: block;
+    margin-top: 100px;
+    text-align: center;
+    font-size: 70px;
+    color: #06f;
+}
+<!-- popup End -->
+ul li,ol li {
+    margin-left: 0px;
+    padding-left: 0;
+}
+h3 {
+    color: #000000;
+    font-size: 1.3em !important;
+    margin-bottom: 0px !important;
+}
+#contentWrapper{
+    height:450px;    
+}
+</style>
+
+    <apex:form >
+        <!-- open sms main Div -->
+
+        <div class="openSMSDiv"><!-- Navigation Div -->
+        <div id="paginate-slider2" class="navigation">
+            <ul>
+                <li><a href="#" class="toc">
+                <h3 class="open_sms_icon">Open SMS</h3>
+                </a></li>
+                <li><a href="#" class="toc">
+                <h3 class="single_sms_icon">Single SMS</h3>
+                </a></li>
+                <li><a href="#" class="toc">
+                <h3 class="bulk_sms_icon">Bulk SMS</h3>
+                </a></li> 
+                <li><a href="#" class="toc">
+                <h3 class="twoway_sms_icon">Two-Way SMS</h3>
+                </a></li> 
+                <li><a href="#" class="toc">
+                <h3 class="sms_chat_icon">SMS Chat</h3>
+                </a></li> 
+                <li><a href="#" class="toc">
+                <h3 class="sms_template_icon">SMS Templates</h3>
+                </a></li>  
+                <li><a href="#" class="toc">
+                <h3 class="purchase_credits_icon">Limits &amp; Usage</h3>
+                </a></li>                            
+            </ul>
+        </div>
+        <!-- Navigation Div End --> <!-- Main Conetnet Div -->
+        <div id="slider2" class="sliderwrapper">
+        <div class="contentdiv">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="smsContent">
+                <tr>
+                    <td align="left" valign="top">
+                        <div class="technology">Introduction</div>
+                        <div class="thelanguage">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="left" valign="top">                                                                       
+                                    <!--<h3 class="heading_tab">Features:</h3>-->
+                                    <ul style="font-size:13px; padding:5px 0px;text-align: justify;">
+                                        <li>Supports most SMS Gateways.</li>
+                                        <li>Send Single SMS to Leads or Contacts.</li>
+                                        <li>Send bulk SMS to Leads or Contacts.</li>
+                                        <li>SMS Chat - Chat with Leads or Contacts directly from Salesforce.</li>
+                                        <li>TwowaySMS - You can now receive incoming messages from any mobile.</li>                                        
+                                        <li>Activity Management - Tasks are created for Contacts or Leads for either single or bulk SMS.</li>                                        
+                                        <li>Get Comprehensive analysis on SMS activity through Reports and Dashboards.</li>
+                                        <li>SMS Templates - Send a quick SMS with the help of Predefined Message Templates.</li>
+                                        <li>Easy Configuration - Supports a wide range of SMS Gateway providers.</li>
+                                        <li>Customize Open SMS for your business using APIs.</li>
+<!--                                         <li>SMS scheduler - Schedule your SMS for any date in the future. <span style="color:#E36008;">(For Future Release)</span></li> -->
+                                </ul>
+                                </td>
+                                <td align="center" valign="top" width="350"><img src="{!URLFOR($Resource.OpenSMS_Base,'Images/APS_openSMS__Logo.png')}" />
+                                </td>
+                            </tr>
+                        </table>
+                        </div>
+                    
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="contentdiv" style="overflow:auto">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0"
+                class="smsContent">
+                <tr>
+                    <td align="left" valign="top"><div class="technology1">Introduction to Single SMS</div>
+                        <div class="thelanguage1 thelanguage">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="left" valign="top" style="padding-top:5px;">
+                                        <p style="font-size:13px;">Users can send a single SMS to either contacts or leads on the Open SMS application. You can plan, 
+                                        select contacts or leads, view activity history and SMS logs of every SMS sent.<br/><br/>
+                                        <ul style="padding-top:10px;">
+                                            <li><a href="http://appshark.com/wp-content/uploads/2014/09/Opens_SMSPro_singlesms_leads.pdf" target="_blank" style="color:#00a6ff;">Click here</a> for instructions on sending Single SMS to leads.</li><br/><br/>
+                                            <li><a href="http://appshark.com/wp-content/uploads/2014/09/Opens_SMSPro_singlesms_contacts.pdf" target="_blank" style="color:#00a6ff;">Click Here</a> for instructions on sending Single SMS to contacts.</li><br/><br/>
+                                        </ul>
+                                        With the Single SMS feature you can send SMS messages to Contacts or Leads and can create a Task for those SMS messages.<br/>
+                                        </p>
+                                    
+                                </td>
+                                <td align="center" valign="top" width="350"><img src="{!URLFOR($Resource.OpenSMS_Base,'Images/single-sms.png')}" height="250px" style="margin-top:-10px;"/><br/>
+                                </td>
+                            </tr>
+                        </table>
+                        </div>
+                    </td>
+                 </tr>
+                 
+                <!-- <tr>
+                    <td align="left" valign="top"><div class="technology1">Step 9</div>
+                        <div class="thelanguage1">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="left" valign="middle">
+                                    <ul >
+                                        <li>Go to Your Name Setup  App Setup  Customize  ActivitiesActivity Search Layouts
+                                        </li>
+                                        <li>Click on Edit link next to Activities List view.
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td align="center" valign="top" width="350" ><img src="{!URLFOR($Resource.OpenSMS_Base,'Images/APS_openSMS__sstep7.gif')}" height="100"/><br />
+                                <a href="#" class="update_btn" data-reveal-id="myModal8"
+                                    data-animation="fade">Click here to view full size</a></td>
+                            </tr>
+                        </table>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" valign="top"><div class="technology1">Step 10</div>
+                        <div class="thelanguage1">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="left" valign="left">
+                                    <ul>
+                                        <li>Add <strong>Send SMS</strong> button to the right and Click on Save.
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td align="center" valign="top" width="350" ><img src="{!URLFOR($Resource.OpenSMS_Base,'Images/APS_openSMS__sstep8.gif')}" height="100"/><br />
+                                <a href="#" class="update_btn" data-reveal-id="myModal9" data-animation="fade">Click here to view full size</a></td>
+                            </tr>
+                        </table>
+                        </div>
+                    </td>
+                </tr> -->
+            </table>
+        </div>
+
+        <div class="contentdiv" style="overflow:auto">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0"
+                class="smsContent">
+                <tr>
+                    <td align="left" valign="top">
+                        <div class="technology2">Introduction to Bulk SMS</div>
+                        <div class="thelanguage2 thelanguage">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td align="left" valign="top" style="padding-top:5px;font-size:13px;">
+                                        <p style="font-size:13px; padding:5px 0px;">Using the Bulk SMS Feature you can send SMS to multiple contacts or leads at a time.</p><br/>
+                                        <ul>
+                                           <li><a href="http://appshark.com/wp-content/uploads/2014/09/Opens_SMSPro_bulksms_leads.pdf" target="_blank" style="color:#00a6ff;">Click Here</a> for instructions on sending Bulk SMS to leads.</li><br/>
+                                           <li><a href="http://appshark.com/wp-content/uploads/2014/09/Opens_SMSPro_bulksms_contacts.pdf" target="_blank" style="color:#00a6ff;">Click Here</a> for instructions on sending Bulk Sms to Contacts.</li><br/>
+                                        </ul>
+                                    </td>
+                                    <td align="center" valign="top" width="350" ><img src="{!URLFOR($Resource.OpenSMS_Base,'Images/bulk-sms.png')}" height="250" style="margin-top:-10px;"/><br />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>                
+            </table>
+        </div>
+        <div class="contentdiv" style="overflow:auto">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0"
+                class="smsContent">
+                <tr>
+                    <td align="left" valign="top">
+                        <div class="technology3">Introduction to Twoway SMS</div>
+                        <div class="thelanguage3 thelanguage">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="left" valign="top" style="padding-top:5px;">
+                                    <p style="font-size:13px;padding:5px 0px;">Using this feature you can not only send an outbound message, but also receive inbound message as a reply and this can be tracked in the salesforce organization where we have open SMS configured.</p><br/>
+                                    <ul>
+                                        <li><a href="http://appshark.com/wp-content/uploads/2014/09/Opens_SMSPro_twoway_sms.pdf" target="_blank" style="color:#00a6ff;">Click Here</a> for instructions on using the Two Way SMS feature in Open SMS. </li>
+                                    </ul>
+                                </td>
+                                <td align="center" valign="top" width="350"><img src="{!URLFOR($Resource.OpenSMS_Base,'Images/two-way.png')}" height="250" style="margin-top:-10px;"/><br/>
+                                </td>
+                            </tr>
+                        </table>
+                        </div>
+                    </td>
+               </tr>
+               </table>
+            </div> 
+            <div class="contentdiv" style="overflow:auto">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="smsContent">
+                    <tr>
+                        <td align="left" valign="top">
+                            <div class="technology4">Introduction to SMS Chat</div>
+                            <div class="thelanguage4 thelanguage">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td align="left" valign="top" style="padding-top:5px;">
+                                             <p style="font-size:13px;padding:5px 0px;">Using the SMS Chat feature you can chat with Contacts and Leads in real time from within Salesforce similar to any chat messenger service. 
+                                             </p><br/>
+                                            <ul>
+                                                <li><a href="http://appshark.com/wp-content/uploads/2014/09/Opens_SMSPro_smschat_feature.pdf" target="_blank" style="color:#00a6ff;">Click Here</a> for instructions on using the SMS Chat feature in Open SMS. </li>
+                                            </ul>
+                                        </td>
+                                        <td align="center" valign="top" width="350"><img src="{!URLFOR($Resource.OpenSMS_Base,'Images/sms-chat.png')}" height="250"/><br/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>  
+            <div class="contentdiv" style="overflow:auto">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="smsContent">
+                    <tr>
+                        <td align="left" valign="top">
+                            <div class="technology5">Introduction to SMS Templates</div>
+                            <div class="thelanguage5 thelanguage">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td align="left" valign="top" style="padding-top:5px;">
+                                           <p style="font-size:13px;padding:5px 0px;">This feature enables you to create message templates and send these as a single or bulk SMS to Leads or Contacts.
+                                             </p><br/>
+                                            <ul>
+                                                <li><a href="http://appshark.com/wp-content/uploads/2014/09/Opens_SMSPro_sms_template.pdf" target="_blank" style="color:#00a6ff;">Click Here</a> for instructions on using the SMS Message Templates feature in Open SMS. </li>
+                                            </ul>
+                                        </td>
+                                        <td align="center" valign="top" width="100"><img src="{!URLFOR($Resource.OpenSMS_Base,'Images/sms-template.png')}" height="350" style="margin-top:-70px;width:250px;margin-right:120px;"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>   
+            <div class="contentdiv" style="overflow:auto">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="smsContent">
+                    <tr>
+                        <td align="left" valign="top">
+                            <div class="technology6">Limits &amp; Usage</div>
+                            <div class="thelanguage6 thelanguage">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td align="left" valign="top" style="padding-top:5px;">
+                                           <!-- <p style="font-size:13px;padding:5px 0px;">This feature enables you to purchase credits to send messages as a single or bulk SMS to Leads or Contacts.
+                                             </p> --><br/>
+                                            <ul>
+                                                <li><a href="CreateCharge" target="_blank" style="color:#00a6ff;">Click Here</a> to see your message limits and usage in the current billing cycle.</li>
+                                                <!-- <li><a href="CreateCharge" target="_blank" style="color:#00a6ff;">Click Here</a> to go to the Purchase Credits page. </li> -->
+                                                <li><a href="DetailReport" target="_blank" style="color:#00a6ff;">Click Here</a> to see the Detailed SMS Usage Report.</li>
+                                            </ul>
+                                        </td>
+                                        <td> 
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>                                          
+        </div>
+
+        <!-- Main Conetnet Div End --></div>
+
+        <!-- open sms main Div End -->
+
+        <div id="myModal" class="reveal-modal" style="display: block;">
+        <img src="{!URLFOR($Resource.OpenSMS_Base,'Images/APS_openSMS__Logo.png')}" alt="" />
+        <a class="close-reveal-modal">&#215;</a></div>
+        
+        <div id="myModal2" class="reveal-modal" style="display: block;">
+        <img src="{!URLFOR($Resource.OpenSMS_Base,'Images/APS_openSMS__sstep1.gif')}" alt="" />
+        <a class="close-reveal-modal">&#215;</a></div>
+
+        <div id="myModal3" class="reveal-modal" style="display: block;">
+        <img src="{!URLFOR($Resource.OpenSMS_Base,'Images/APS_openSMS__sstep2.gif')}" alt="" />
+        <a class="close-reveal-modal">&#215;</a></div>
+
+         <div id="Modal3" class="reveal-modal" style="display: block;">
+        <img src="{!URLFOR($Resource.OpenSMS_Base,'Images/step3.png')}" alt="" /> 
+        <a class="close-reveal-modal">&#215;</a></div>
+        
+        <div id="myModal4" class="reveal-modal" style="display: block;">
+        <img src="{!URLFOR($Resource.OpenSMS_Base,'Images/APS_openSMS__sstep3.gif')}" alt="" />
+        <a class="close-reveal-modal">&#215;</a></div>
+
+        <div id="myModal5" class="reveal-modal" style="display: block;">
+        <img src="{!URLFOR($Resource.OpenSMS_Base,'Images/APS_openSMS__sstep4.gif')}" alt="" />
+        <a class="close-reveal-modal">&#215;</a></div>
+        
+        <div id="Modal7" class="reveal-modal" style="display: block;">
+        <img src="{!URLFOR($Resource.OpenSMS_Base,'Images/step7.png')}" alt="" />
+        <a class="close-reveal-modal">&#215;</a></div>
+
+        <div id="myModal6" class="reveal-modal" style="display: block;">
+        <img src="{!URLFOR($Resource.OpenSMS_Base,'Images/APS_openSMS__sstep5.gif')}" alt="" />
+        <a class="close-reveal-modal">&#215;</a></div>
+
+        <div id="myModal7" class="reveal-modal" style="display: block;">
+        <img src="{!URLFOR($Resource.OpenSMS_Base,'Images/APS_openSMS__sstep6.gif')}" alt="" />
+        <a class="close-reveal-modal">&#215;</a></div>
+
+        <div id="myModal8" class="reveal-modal" style="display: block;">
+        <img src="{!URLFOR($Resource.OpenSMS_Base,'Images/APS_openSMS__sstep7.gif')}" alt="" />
+        <a class="close-reveal-modal">&#215;</a></div>
+
+        <div id="myModal9" class="reveal-modal" style="display: block;">
+        <img src="{!URLFOR($Resource.OpenSMS_Base,'Images/APS_openSMS__sstep8.gif')}" alt="" />
+        <a class="close-reveal-modal">&#215;</a></div>
+        
+        <div id="myModalb1" class="reveal-modal" style="display: block;">
+        <img src="{!URLFOR($Resource.OpenSMS_Base,'Images/APS_openSMS__bStep1.gif')}" alt="" />
+        <a class="close-reveal-modal">&#215;</a></div>
+
+        <div id="myModalb2" class="reveal-modal" style="display: block;">
+        <img src="{!URLFOR($Resource.OpenSMS_Base,'Images/APS_openSMS__bStep2.gif')}" alt="" />
+        <a class="close-reveal-modal">&#215;</a></div>
+
+        <div id="myModalb3" class="reveal-modal" style="display: block;">
+        <img src="{!URLFOR($Resource.OpenSMS_Base,'Images/APS_openSMS__bStep3.gif')}" alt="" />
+        <a class="close-reveal-modal">&#215;</a></div>
+
+        <div id="myModalb4" class="reveal-modal" style="display: block;">
+        <img src="{!URLFOR($Resource.OpenSMS_Base,'Images/APS_openSMS__bStep4.gif')}" alt="" />
+        <a class="close-reveal-modal">&#215;</a></div>
+        
+        <div id="myModalLastStep" class="reveal-modal" style="display: block;">
+        <img src="{!URLFOR($Resource.OpenSMS_Base,'Images/APS_openSMS__sstep10.gif')}" alt="" />
+        <a class="close-reveal-modal">&#215;</a></div>
+
+        <script type="text/javascript">
+
+featuredcontentslider.init({
+    id: "slider2",  //id of main slider DIV
+    contentsource: ["inline", ""],  //Valid values: ["inline", ""] or ["ajax", "path_to_file"]
+    toc: "markup",  //Valid values: "#increment", "markup", ["label1", "label2", etc]
+    nextprev: ["Previous", "Next"],  //labels for "prev" and "next" links. Set to "" to hide.
+    revealtype: "click", //Behavior of pagination links to reveal the slides: "click" or "mouseover"
+    enablefade: [true, 0.2],  //[true/false, fadedegree]
+    autorotate: [false, 3000],  //[true/false, pausetime]
+    onChange: function(previndex, curindex){  //event handler fired whenever script changes slide
+        //previndex holds index of last slide viewed b4 current (1=1st slide, 2nd=2nd etc)
+        //curindex holds index of currently shown slide (1=1st slide, 2nd=2nd etc)
+    }
+})
+</script>
+    </apex:form>
+</apex:page>
