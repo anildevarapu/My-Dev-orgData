@@ -6,6 +6,8 @@ public class CalendarExample_Controller {
     //The calendar plugin is expecting dates is a certain format. We can use this string to get it formated correctly
     String dtFormat = 'EEE, d MMM yyyy HH:mm:ss z';
      
+    string myVariable = 'This is For Test!';
+     
     //constructor
     public CalendarExample_Controller() {
         //Default showing my events to on
